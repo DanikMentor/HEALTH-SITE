@@ -1,0 +1,285 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>HealthAI | Авторизация</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@600;700;800&family=Roboto:wght@400;500&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    
+    <style>
+        :root {
+            --bg-main: #1F1F1F;
+            --card-bg: #2A2A2A;
+            --accent-main: #22C55E;
+            --accent-secondary: #A3E635;
+            --glow: #06B6D4;
+            --text-main: #E5E7EB;
+        }
+
+        body {
+            margin: 0; padding: 0;
+            font-family: 'Roboto', sans-serif;
+            background-color: var(--bg-main);
+            color: var(--text-main);
+            min-height: 100vh;
+            display: flex; flex-direction: column;
+            overflow-x: hidden;
+        }
+
+        /* --- ФОН --- */
+        .auth-bg {
+            position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+            z-index: -1; filter: blur(80px); opacity: 0.15;
+        }
+        .blob {
+            position: absolute; width: 400px; height: 400px;
+            background: var(--accent-main); border-radius: 50%;
+            top: -10%; right: -10%; animation: move 15s infinite alternate;
+        }
+        @keyframes move { from { transform: translate(0,0); } to { transform: translate(-100px, 100px); } }
+
+        /* --- HEADER --- */
+        header { padding: 25px 5%; display: flex; justify-content: space-between; align-items: center; }
+        .logo { font-family: 'Poppins', sans-serif; font-weight: 800; font-size: 1.5rem; color: #fff; text-decoration: none; }
+        .logo i { color: var(--accent-main); margin-right: 8px; }
+        .btn-back { 
+            text-decoration: none; color: var(--accent-secondary); 
+            border: 1px solid rgba(163, 230, 53, 0.3); padding: 8px 18px; border-radius: 10px; transition: 0.3s;
+        }
+        .btn-back:hover { background: rgba(163, 230, 53, 0.1); transform: translateX(-5px); }
+
+        /* --- КАРТОЧКА --- */
+        .auth-container { flex: 1; display: flex; align-items: center; justify-content: center; padding: 20px 20px 60px 20px; }
+        .auth-card {
+            background: rgba(42, 42, 42, 0.7);
+            backdrop-filter: blur(15px);
+            padding: 40px; border-radius: 28px;
+            width: 100%; max-width: 420px;
+            border: 1px solid rgba(255,255,255,0.05);
+            box-shadow: 0 25px 50px rgba(0,0,0,0.4);
+        }
+
+        .auth-tabs {
+            display: flex; background: rgba(0,0,0,0.2); border-radius: 12px;
+            margin-bottom: 30px; position: relative; padding: 4px;
+        }
+        .tab-btn {
+            flex: 1; border: none; background: none; color: #888; padding: 12px;
+            cursor: pointer; font-weight: 600; font-family: 'Poppins'; z-index: 2; transition: 0.3s;
+        }
+        .tab-btn.active { color: #1F1F1F; }
+        .tab-slider {
+            position: absolute; width: calc(50% - 4px); height: calc(100% - 8px);
+            background: var(--accent-main); border-radius: 10px; transition: 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        /* --- ПОЛЯ ВВОДА --- */
+        .input-group { margin-bottom: 20px; transition: transform 0.3s ease; }
+        .input-group label { display: block; margin-bottom: 8px; font-size: 0.85rem; color: #9CA3AF; transition: 0.3s; }
+        
+        .input-wrapper { position: relative; display: flex; align-items: center; border-radius: 12px; }
+
+        .input-group:hover { transform: translateY(-3px); }
+        .input-group:hover label { color: var(--accent-secondary); }
+
+        .input-wrapper i.prefix {
+            position: absolute; left: 15px; color: var(--accent-secondary); 
+            pointer-events: none; width: 20px; text-align: center; z-index: 5;
+        }
+
+        .input-wrapper input {
+            width: 100%;
+            padding: 14px 45px !important;
+            background: rgba(255,255,255,0.03);
+            border: 1px solid rgba(255,255,255,0.1);
+            border-radius: 12px;
+            color: #fff; outline: none; transition: all 0.3s ease;
+            box-sizing: border-box;
+        }
+
+        .input-wrapper:hover input { border-color: rgba(6, 182, 212, 0.4); background: rgba(255,255,255,0.06); }
+        .input-wrapper input:focus { border-color: var(--glow); background: rgba(255,255,255,0.08); box-shadow: 0 0 20px rgba(6, 182, 212, 0.25); }
+
+        .toggle-password { position: absolute; right: 15px; cursor: pointer; color: #6B7280; padding: 5px; z-index: 10; transition: 0.3s; }
+        .toggle-password:hover { color: var(--accent-main); transform: scale(1.2); }
+
+        /* --- КНОПКА SUBMIT --- */
+        .btn-submit {
+            width: 100%; padding: 14px; 
+            background: linear-gradient(90deg, var(--accent-main), var(--accent-secondary));
+            border: none; border-radius: 12px; color: #1F1F1F; font-weight: 700; 
+            font-family: 'Poppins'; cursor: pointer; margin-top: 10px; 
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+        }
+        .btn-submit:hover { transform: translateY(-3px); box-shadow: 0 10px 20px rgba(34, 197, 94, 0.4); }
+
+        /* --- СОЦИАЛЬНЫЕ МЕТОДЫ --- */
+        .social-divider {
+            display: flex; align-items: center; text-align: center;
+            margin: 30px 0; color: #6B7280; font-size: 0.8rem;
+        }
+        .social-divider::before, .social-divider::after {
+            content: ''; flex: 1; border-bottom: 1px solid rgba(255,255,255,0.1);
+        }
+        .social-divider span { padding: 0 10px; }
+
+        .social-grid { display: flex; justify-content: center; gap: 15px; }
+        .social-btn {
+            width: 55px; height: 55px; border-radius: 14px;
+            background: rgba(255, 255, 255, 0.03);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            color: #fff; font-size: 1.3rem; display: flex;
+            align-items: center; justify-content: center;
+            cursor: pointer; transition: all 0.3s ease;
+            text-decoration: none;
+        }
+        .social-btn:hover {
+            background: rgba(255, 255, 255, 0.08);
+            transform: translateY(-5px);
+            border-color: var(--glow);
+            box-shadow: 0 8px 15px rgba(0, 0, 0, 0.3);
+            color: var(--glow);
+        }
+
+        /* --- СКРЫТЫЕ ПОЛЯ --- */
+        .hidden-field { display: none; opacity: 0; transform: translateY(-10px); }
+        .show-field { display: block; animation: fieldAppear 0.5s forwards cubic-bezier(0.4, 0, 0.2, 1); }
+        @keyframes fieldAppear { to { opacity: 1; transform: translateY(0); } }
+
+        .forgot-link { display: block; text-align: right; font-size: 0.8rem; color: #6B7280; text-decoration: none; margin-top: -10px; margin-bottom: 15px; transition: 0.3s; }
+        .forgot-link:hover { color: var(--accent-main); }
+    </style>
+</head>
+<body>
+
+    <div class="auth-bg"><div class="blob"></div></div>
+
+    <header>
+        <a href="index.html" class="logo"><i class="fa-solid fa-leaf"></i> HealthAI</a>
+        <a href="index.html" class="btn-back"><i class="fa-solid fa-arrow-left"></i> На главную</a>
+    </header>
+
+    <main class="auth-container">
+        <div class="auth-card">
+            <div style="text-align: center; margin-bottom: 25px;">
+                <h1 id="title" style="margin: 0; font-family: 'Poppins';">С возвращением!</h1>
+                <p id="subtitle" style="color: #9CA3AF; font-size: 0.9rem;">Войдите в систему</p>
+            </div>
+
+            <div class="auth-tabs">
+                <button class="tab-btn active" onclick="switchMode('login')">Вход</button>
+                <button class="tab-btn" onclick="switchMode('register')">Регистрация</button>
+                <div class="tab-slider" id="slider"></div>
+            </div>
+
+            <form id="form">
+                <div class="input-group">
+                    <label id="label-email">Email или Логин</label>
+                    <div class="input-wrapper">
+                        <i class="fa-solid fa-envelope prefix"></i>
+                        <input type="text" id="email" placeholder="example@mail.com" required>
+                    </div>
+                </div>
+
+                <div class="input-group hidden-field" id="group-username">
+                    <label>Придумайте Логин</label>
+                    <div class="input-wrapper">
+                        <i class="fa-solid fa-user prefix"></i>
+                        <input type="text" id="username" placeholder="fitness_pro">
+                    </div>
+                </div>
+
+                <div class="input-group">
+                    <label>Пароль</label>
+                    <div class="input-wrapper">
+                        <i class="fa-solid fa-lock prefix"></i>
+                        <input type="password" class="pass-input" placeholder="••••••••" required>
+                        <i class="fa-solid fa-eye-slash toggle-password"></i>
+                    </div>
+                </div>
+
+                <div class="input-group hidden-field" id="group-confirm">
+                    <label>Подтвердите пароль</label>
+                    <div class="input-wrapper">
+                        <i class="fa-solid fa-lock prefix"></i>
+                        <input type="password" class="pass-input" placeholder="••••••••">
+                        <i class="fa-solid fa-eye-slash toggle-password"></i>
+                    </div>
+                </div>
+
+                <a href="#" class="forgot-link" id="forgot-pw">Забыли пароль?</a>
+
+                <button type="submit" class="btn-submit" id="btn-text">Войти</button>
+            </form>
+
+            <div class="social-divider">
+                <span>Или продолжить через</span>
+            </div>
+
+            <div class="social-grid">
+                <a href="#" class="social-btn" title="Google"><i class="fa-brands fa-google"></i></a>
+                <a href="#" class="social-btn" title="Apple"><i class="fa-brands fa-apple"></i></a>
+                <a href="#" class="social-btn" title="Facebook"><i class="fa-brands fa-facebook-f"></i></a>
+            </div>
+        </div>
+    </main>
+
+    <script>
+        function switchMode(mode) {
+            const slider = document.getElementById('slider');
+            const title = document.getElementById('title');
+            const subtitle = document.getElementById('subtitle');
+            const btnText = document.getElementById('btn-text');
+            const labelEmail = document.getElementById('label-email');
+            const forgotPw = document.getElementById('forgot-pw');
+            
+            const groupUser = document.getElementById('group-username');
+            const groupConfirm = document.getElementById('group-confirm');
+            const tabs = document.querySelectorAll('.tab-btn');
+
+            if (mode === 'register') {
+                slider.style.transform = 'translateX(100%)';
+                tabs[0].classList.remove('active');
+                tabs[1].classList.add('active');
+                title.innerText = 'Создать аккаунт';
+                subtitle.innerText = 'Начни свой путь к здоровью';
+                btnText.innerText = 'Зарегистрироваться';
+                labelEmail.innerText = 'Ваш Email';
+                forgotPw.style.display = 'none';
+                groupUser.classList.add('show-field');
+                groupConfirm.classList.add('show-field');
+            } else {
+                slider.style.transform = 'translateX(0)';
+                tabs[1].classList.remove('active');
+                tabs[0].classList.add('active');
+                title.innerText = 'С возвращением!';
+                subtitle.innerText = 'Войдите в систему';
+                btnText.innerText = 'Войти';
+                labelEmail.innerText = 'Email или Логин';
+                forgotPw.style.display = 'block';
+                groupUser.classList.remove('show-field');
+                groupConfirm.classList.remove('show-field');
+            }
+        }
+
+        document.querySelectorAll('.toggle-password').forEach(eye => {
+            eye.addEventListener('click', function() {
+                const input = this.previousElementSibling;
+                if (input.type === 'password') {
+                    input.type = 'text';
+                    this.classList.replace('fa-eye-slash', 'fa-eye');
+                    this.style.color = '#22C55E';
+                } else {
+                    input.type = 'password';
+                    this.classList.replace('fa-eye', 'fa-eye-slash');
+                    this.style.color = '#6B7280';
+                }
+            });
+        });
+    </script>
+
+    <script src="js/script.js"></script>
+</body>
+</html>

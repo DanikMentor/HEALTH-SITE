@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>HealthAI | Настройки</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@600;700;800&family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <link rel="stylesheet" href="css/settings.css">
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body class="dark-theme"> <div class="bg-blob"></div>
+    <div class="bg-blob-2"></div>
+
+   <header id="header">
+    <a href="index.html" class="logo"><i class="fa-solid fa-leaf"></i> HealthAI</a>
+    <nav class="nav-links">
+        <a href="index.html">Главная</a>
+        <a href="#">Дневник</a>
+        <a href="#">Рецепты</a>
+        <a href="#">Тренировки</a>
+        <a href="#">Чат</a>
+    </nav>
+
+    <div class="auth-container">
+        <div id="authGuest" class="auth-guest">
+            <button class="btn-login-trigger" onclick="simulateLogin()">Войти</button>
+            <a href="#" class="btn-register">Регистрация</a>
+        </div>
+
+        <div id="authUser" class="auth-user" style="display: none;">
+            <div class="avatar-wrapper">
+                <img src="https://i.pravatar.cc/150?img=32" alt="Avatar" class="header-avatar">
+                <div class="online-status"></div>
+            </div>
+            <i class="fa-solid fa-chevron-down"></i>
+        </div>
+    </div>
+</header>
+
+    <main class="settings-container">
+        
+        <aside class="settings-sidebar fade-in">
+            <h2 class="sidebar-title">Настройки</h2>
+            <ul class="sidebar-menu">
+                <li><a href="#account" class="active" data-section="account"><i class="fa-solid fa-user-gear"></i> Аккаунт</a></li>
+                <li><a href="#profile" data-section="profile"><i class="fa-solid fa-id-card"></i> Профиль</a></li>
+                <li><a href="#security" data-section="security"><i class="fa-solid fa-shield-halved"></i> Безопасность</a></li>
+                <li><a href="#notifications" data-section="notifications"><i class="fa-solid fa-bell"></i> Уведомления</a></li>
+                <li><a href="#appearance" data-section="appearance"><i class="fa-solid fa-palette"></i> Внешний вид</a></li>
+                <li><a href="#privacy" data-section="privacy"><i class="fa-solid fa-lock"></i> Приватность</a></li>
+            </ul>
+        </aside>
+
+        <section class="settings-content fade-in" style="animation-delay: 0.1s;">
+            
+            <div id="account" class="settings-section active">
+                <h1 class="section-main-title">Настройки аккаунта</h1>
+                
+                <div class="settings-card">
+                    <div class="card-header">
+                        <h3><i class="fa-solid fa-envelope" style="color: var(--accent-main);"></i> Электронная почта</h3>
+                        <p>Ваш текущий email адрес используется для входа и уведомлений.</p>
+                    </div>
+                    <div class="card-body">
+                        <div class="input-group">
+                            <label>Текущий Email</label>
+                            <input type="email" value="alex.ivanov@mail.com" readonly class="readonly-input">
+                        </div>
+                        <div class="input-group">
+                            <label>Новый Email</label>
+                            <input type="email" placeholder="example@newmail.com">
+                        </div>
+                        <button class="btn-primary">Применить изменения</button>
+                    </div>
+                </div>
+
+                <div class="settings-card danger-zone">
+                    <div class="card-header">
+                        <h3><i class="fa-solid fa-trash-can"></i> Удаление аккаунта</h3>
+                        <p>Это действие необратимо. Все ваши данные будут удалены навсегда.</p>
+                    </div>
+                    <div class="card-body">
+                        <button class="btn-danger">Удалить аккаунт...</button>
+                    </div>
+                </div>
+            </div>
+
+            <div id="appearance" class="settings-section">
+                <h1 class="section-main-title">Внешний вид</h1>
+                
+                <div class="settings-card">
+                    <div class="card-header">
+                        <h3><i class="fa-solid fa-moon" style="color: var(--glow);"></i> Тема интерфейса</h3>
+                        <p>Выберите цветовую схему, которая вам больше нравится.</p>
+                    </div>
+                    <div class="card-body theme-switch-container">
+                        <div class="theme-option dark active" data-theme="dark">
+                            <div class="theme-preview"></div>
+                            <span>Тёмная (Рекомендуется)</span>
+                        </div>
+                        <div class="theme-option light" data-theme="light">
+                            <div class="theme-preview"></div>
+                            <span>Светлая</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div id="profile" class="settings-section"><h1>Настройки профиля</h1><p>Контент в разработке...</p></div>
+            <div id="security" class="settings-section"><h1>Безопасность</h1><p>Контент в разработке...</p></div>
+            
+            <div id="notifications" class="settings-section">
+                <h1 class="section-main-title">Уведомления</h1>
+                <div class="settings-card">
+                    <div class="card-header">
+                        <h3>Пуш-уведомления</h3>
+                        <p>Управляйте тем, как мы связываемся с вами на устройстве.</p>
+                    </div>
+                    <div class="card-body toggle-list">
+                        <div class="toggle-item">
+                            <span>Напоминания о тренировках</span>
+                            <label class="switch">
+                                <input type="checkbox" checked>
+                                <span class="slider round"></span>
+                            </label>
+                        </div>
+                        <div class="toggle-item">
+                            <span>Отчеты о питании за неделю</span>
+                            <label class="switch">
+                                <input type="checkbox">
+                                <span class="slider round"></span>
+                            </label>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div id="privacy" class="settings-section"><h1>Приватность</h1><p>Контент в разработке...</p></div>
+
+        </section>
+    </main>
+
+    <div class="section-divider"></div>
+    <footer>
+        <div class="footer-logo"><i class="fa-solid fa-leaf"></i> HealthAI</div>
+        <div class="social-icons">
+            <a href="#"><i class="fa-brands fa-instagram"></i></a>
+            <a href="#"><i class="fa-brands fa-telegram"></i></a>
+            <a href="#"><i class="fa-brands fa-youtube"></i></a>
+        </div>
+        <p class="copyright">&copy; 2026 HealthAI. Все настройки защищены.</p>
+    </footer>
+
+    <div id="sidebarOverlay" class="sidebar-overlay"></div>
+<aside id="userSidebar" class="user-sidebar">
+    <div class="sidebar-header">
+        <div class="user-preview">
+            <img src="https://i.pravatar.cc/150?img=32" alt="Avatar">
+            <div>
+                <h4>Алексей Иванов</h4>
+                <span>Pro Account</span>
+            </div>
+        </div>
+        <button id="closeSidebar" class="btn-close">&times;</button>
+    </div>
+    
+    <div class="sidebar-content">
+        <div class="nav-group">
+            <small>Меню</small>
+            <a href="profile.html"><i class="fa-solid fa-circle-user"></i> Профиль</a>
+            <a href="settings.html"><i class="fa-solid fa-gear"></i> Настройки</a>
+        </div>
+    </div>
+
+    <div class="sidebar-footer">
+        <button onclick="simulateLogout()" class="btn-logout">
+            <i class="fa-solid fa-right-from-bracket"></i> Выйти
+        </button>
+    </div>
+</aside>
+
+    <script src="js/settings.js"></script>
+    <script src="js/script.js"></script>
+</body>
+</html>

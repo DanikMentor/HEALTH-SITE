@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>HealthAI | Профиль пользователя</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@600;700;800&family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <link rel="stylesheet" href="css/profile.css">
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+    <div class="bg-blob"></div>
+    <div class="bg-blob-2"></div>
+
+    <header id="header">
+    <a href="index.html" class="logo"><i class="fa-solid fa-leaf"></i> HealthAI</a>
+    <nav class="nav-links">
+        <a href="index.html">Главная</a>
+        <a href="#">Дневник</a>
+        <a href="#">Рецепты</a>
+        <a href="#">Тренировки</a>
+        <a href="#">Чат</a>
+    </nav>
+
+    <div class="auth-container">
+        <div id="authGuest" class="auth-guest">
+            <button class="btn-login-trigger" onclick="simulateLogin()">Войти</button>
+            <a href="#" class="btn-register">Регистрация</a>
+        </div>
+
+        <div id="authUser" class="auth-user" style="display: none;">
+            <div class="avatar-wrapper">
+                <img src="https://i.pravatar.cc/150?img=32" alt="Avatar" class="header-avatar">
+                <div class="online-status"></div>
+            </div>
+            <i class="fa-solid fa-chevron-down"></i>
+        </div>
+    </div>
+</header>
+
+    <main class="container">
+        
+        <section class="profile-hero fade-up">
+            <div class="hero-avatar-wrapper">
+                <img src="https://i.pravatar.cc/150?img=32" alt="User Avatar" class="hero-avatar">
+                <div class="status-badge" title="В огне!"><i class="fa-solid fa-fire"></i></div>
+            </div>
+            <div class="hero-info">
+                <div class="badge-streak">Серия: 14 дней подряд</div>
+                <h1>Алексей Иванов</h1>
+                <p>Любитель фитнеса • Цель: Набор мышечной массы</p>
+                <button class="btn-edit"><i class="fa-solid fa-pen"></i> Редактировать профиль</button>
+            </div>
+        </section>
+
+        <section class="stats-grid">
+            <div class="stat-card fade-up">
+                <div class="stat-icon"><i class="fa-solid fa-dumbbell"></i></div>
+                <div class="stat-info">
+                    <h3 class="counter" data-target="42">0</h3>
+                    <p>Тренировок за месяц</p>
+                </div>
+            </div>
+            <div class="stat-card fade-up" style="transition-delay: 0.1s;">
+                <div class="stat-icon"><i class="fa-solid fa-droplet"></i></div>
+                <div class="stat-info">
+                    <h3><span class="counter" data-target="2">0</span>.<span class="counter" data-target="5">0</span> л</h3>
+                    <p>Выпито воды сегодня</p>
+                </div>
+            </div>
+            <div class="stat-card fade-up" style="transition-delay: 0.2s;">
+                <div class="stat-icon"><i class="fa-solid fa-bolt"></i></div>
+                <div class="stat-info">
+                    <h3 class="counter" data-target="8600">0</h3>
+                    <p>Шагов сегодня</p>
+                </div>
+            </div>
+        </section>
+
+        <section class="analytics-grid">
+            <div class="analytics-card fade-up">
+                <h2 class="section-title">Прогресс целей</h2>
+                
+                <div class="progress-item">
+                    <div class="progress-info">
+                        <span>Снижение веса (75 кг / 80 кг)</span>
+                        <span style="color: var(--accent-main);">85%</span>
+                    </div>
+                    <div class="progress-bg"><div class="progress-fill fill-green" data-width="85%"></div></div>
+                </div>
+
+                <div class="progress-item">
+                    <div class="progress-info">
+                        <span>Белок (120г / 150г)</span>
+                        <span style="color: var(--glow);">80%</span>
+                    </div>
+                    <div class="progress-bg"><div class="progress-fill fill-cyan" data-width="80%"></div></div>
+                </div>
+            </div>
+
+            <div class="analytics-card fade-up" style="transition-delay: 0.2s; display: flex; flex-direction: column; align-items: center;">
+                <h2 class="section-title" style="align-self: flex-start;">Калории</h2>
+                <div class="circular-progress">
+                    <svg viewBox="0 0 150 150">
+                        <circle class="circle-bg" cx="75" cy="75" r="70"></circle>
+                        <circle class="circle-fill" cx="75" cy="75" r="70" data-offset="154"></circle>
+                    </svg>
+                    <div class="circle-text">
+                        <h4>1450</h4>
+                        <p>из 2200 ккал</p>
+                    </div>
+                </div>
+                <p style="color: var(--text-muted); font-size: 0.9rem;">Осталось: 750 ккал</p>
+            </div>
+        </section>
+
+        <section>
+            <h2 class="section-title fade-up">Для вас сегодня</h2>
+            <div class="rec-grid">
+                <div class="rec-card fade-up">
+                    <img src="https://images.unsplash.com/photo-1546069901-ba9599a7e63c?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80" alt="Recipe">
+                    <div class="rec-overlay">
+                        <span class="rec-tag">Завтрак</span>
+                        <h3>Авокадо тост с яйцом</h3>
+                        <p>Идеально для восполнения белка. Готовится 10 минут.</p>
+                    </div>
+                </div>
+                <div class="rec-card fade-up" style="transition-delay: 0.1s;">
+                    <img src="https://images.unsplash.com/photo-1517836357463-d25dfeac3438?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80" alt="Workout">
+                    <div class="rec-overlay">
+                        <span class="rec-tag" style="background: var(--glow); color: #fff;">Тренировка</span>
+                        <h3>Кардио HIIT 20 мин</h3>
+                        <p>Сжигаем калории быстро и эффективно. Нужен только коврик.</p>
+                    </div>
+                </div>
+                <div class="rec-card fade-up" style="transition-delay: 0.2s;">
+                    <img src="https://images.unsplash.com/photo-1544367567-0f2fcb009e0b?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80" alt="Yoga">
+                    <div class="rec-overlay">
+                        <span class="rec-tag" style="background: #A855F7; color: #fff;">Восстановление</span>
+                        <h3>Вечерняя растяжка</h3>
+                        <p>Снимаем напряжение после рабочего дня.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <div class="section-divider"></div>
+    <footer>
+        <div class="logo"><i class="fa-solid fa-leaf"></i> HealthAI</div>
+        <p style="color: #6B7280; margin-top: 15px; font-size: 0.9rem;">Ваш персональный проводник в мир здоровья.</p>
+        <div class="social-icons">
+            <a href="#"><i class="fa-brands fa-instagram"></i></a>
+            <a href="#"><i class="fa-brands fa-telegram"></i></a>
+            <a href="#"><i class="fa-brands fa-youtube"></i></a>
+        </div>
+    </footer>
+
+    <div id="sidebarOverlay" class="sidebar-overlay"></div>
+<aside id="userSidebar" class="user-sidebar">
+    <div class="sidebar-header">
+        <div class="user-preview">
+            <img src="https://i.pravatar.cc/150?img=32" alt="Avatar">
+            <div>
+                <h4>Алексей Иванов</h4>
+                <span>Pro Account</span>
+            </div>
+        </div>
+        <button id="closeSidebar" class="btn-close">&times;</button>
+    </div>
+    
+    <div class="sidebar-content">
+        <div class="nav-group">
+            <small>Меню</small>
+            <a href="profile.html"><i class="fa-solid fa-circle-user"></i> Профиль</a>
+            <a href="settings.html"><i class="fa-solid fa-gear"></i> Настройки</a>
+        </div>
+    </div>
+
+    <div class="sidebar-footer">
+        <button onclick="simulateLogout()" class="btn-logout">
+            <i class="fa-solid fa-right-from-bracket"></i> Выйти
+        </button>
+    </div>
+</aside>
+
+    <script src="js/profile.js"></script>
+    <script src="js/script.js"></script>
+</body>
+</html>
