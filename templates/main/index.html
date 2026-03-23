@@ -1,0 +1,142 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content %}
+<section class="hero" id="hero">
+    <div class="hero-bg-glow"></div>
+    <div class="hero-content fade-up">
+        <div class="badge">Next-Gen Fitness 2026</div>
+        <h1 class="hero-title">Стань лучшей <br> <span class="text-gradient">версией себя</span></h1>
+        <p class="hero-subtitle">Персональный биохакинг в твоем кармане. Тренируйся умнее, а не дольше.</p>
+        <div class="hero-buttons">
+            <a href="#cta" class="btn btn-primary btn-large btn-animated glow-effect">Попробовать бесплатно</a>
+            <a href="#features" class="btn btn-outline btn-large btn-animated">Посмотреть фичи</a>
+        </div>
+    </div>
+</section>
+
+<div class="section-separator"></div>
+
+<section class="features" id="features">
+    <div class="section-header fade-up text-center">
+        <h2 class="section-title">Всё для твоего <span class="text-gradient">успеха</span></h2>
+    </div>
+    <div class="features-grid">
+        </div>
+</section>
+
+    <div class="features-grid">
+        <div class="feature-card glass-card fade-up">
+            <div class="icon-wrapper"><i class="fa-solid fa-fire"></i></div>
+            <h3>Тренировки</h3>
+            <p>Адаптивные программы, которые подстраиваются под твой темп.</p>
+        </div>
+        <div class="feature-card glass-card fade-up">
+            <div class="icon-wrapper"><i class="fa-solid fa-utensils"></i></div>
+            <h3>Рецепты</h3>
+            <p>Умное меню с учетом твоих дефицитов и предпочтений.</p>
+        </div>
+        <div class="feature-card glass-card fade-up">
+            <div class="icon-wrapper"><i class="fa-solid fa-robot"></i></div>
+            <h3>AI Чат</h3>
+            <p>Круглосуточный доступ к экспертным знаниям в области ЗОЖ.</p>
+        </div>
+        <div class="feature-card glass-card fade-up">
+            <div class="icon-wrapper"><i class="fa-brands fa-telegram"></i></div>
+            <h3>Закрытый TG</h3>
+            <p>Комьюнити единомышленников и эксклюзивные советы каждый день.</p>
+        </div>
+        <div class="feature-card glass-card fade-up">
+            <div class="icon-wrapper"><i class="fa-solid fa-chart-line"></i></div>
+            <h3>Аналитика</h3>
+            <p>Детальные графики твоего прогресса и биометрии тела.</p>
+        </div>
+        <div class="feature-card glass-card fade-up">
+            <div class="icon-wrapper"><i class="fa-solid fa-droplet"></i></div>
+            <h3>Дневник</h3>
+            <p>Контроль водного баланса и макронутриентов в одно касание.</p>
+        </div>
+    </div>
+</section>
+
+<br>
+<br>
+<div class="section-separator"></div>
+<br>
+<br>
+
+<section class="stats-section" id="stats">
+    <div class="section-header fade-up text-center">
+        <h2 class="section-title">Цифры, которыми <span class="text-gradient">мы гордимся</span></h2>
+    </div>
+    <div class="stats-grid fade-up">
+        <div class="stat-block glass-card">
+            <h3 class="counter" data-target="50000">0</h3>
+            <p>Пользователей</p>
+        </div>
+        <div class="stat-block glass-card">
+            <h3 class="counter" data-target="1000">0</h3>
+            <p>Рецептов</p>
+        </div>
+        <div class="stat-block glass-card">
+            <h3 class="counter" data-target="100">0</h3>
+            <p>Тренировок</p>
+        </div>
+        <div class="stat-block glass-card">
+            <h3 class="counter" data-target="99">0</h3>
+            <p>Точность ИИ %</p>
+        </div>
+    </div>
+</section>
+
+<br>
+<br>
+<div class="section-separator"></div>
+<br>
+<br>
+
+<section class="ai-chat-section section-padding" id="ai-chat">
+    <div class="ai-content fade-up">
+        <h2>Твой личный <br><span class="text-gradient">AI Тренер</span></h2>
+        <p>Задай вопрос о тренировке или питании. Наш ИИ проанализировал тысячи научных исследований, чтобы дать тебе лучший совет.</p>
+    </div>
+    <div class="ai-demo glass-card fade-up shadow-glow">
+        <div class="chat-header">
+            <div class="dot red"></div><div class="dot yellow"></div><div class="dot green"></div>
+            <span>HealthAI Assistant</span>
+        </div>
+        <div class="chat-body">
+            <div class="msg user-msg">Как быстро восстановиться после бега?</div>
+            <div class="msg ai-msg typing-container">
+                <span id="typing-text"></span><span class="cursor">|</span>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section class="cta-section section-divider" id="cta">
+    <div class="cta-card fade-up premium-glow">
+        <div class="cta-content">
+            <div class="badge-mini">Limited Offer</div>
+            <h2>Готов к мощной <br>трансформации?</h2>
+            <p>Присоединяйся к HealthApp сегодня и получи персональный план питания от нашего ИИ бесплатно на первую неделю.</p>
+            <div class="cta-btns">
+                <a href="/users/register/" class="btn btn-white btn-animated btn-large">Попробовать бесплатно</a>
+            </div>
+            <p class="cta-subtext">Никаких привязок карты. Отмена в любое время.</p>
+        </div>
+        <div class="cta-visual-elements">
+            <div class="circle-glow"></div>
+            <div class="floating-icons">
+                <i class="fa-solid fa-star"></i>
+                <i class="fa-solid fa-bolt"></i>
+            </div>
+        </div>
+    </div>
+</section>
+{% endblock %}
+{% block js %}
+<script>
+    const aiResponseText = "Привет! Рекомендую выполнить ягодичный мостик и махи ногами лежа. Это снизит нагрузку на суставы. Выслать видео техники?";
+</script>
+{% endblock %}

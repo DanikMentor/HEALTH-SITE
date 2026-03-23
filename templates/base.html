@@ -1,0 +1,77 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}HealthApp | Твой AI Фитнес-Помощник{% endblock %}</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="{% static 'css/main.css' %}">
+    {% block css %}{% endblock %}
+</head>
+<body>
+    <header class="navbar-fixed" id="navbar">
+        <div class="nav-container-fluid">
+            <a href="/" class="logo">
+                <i class="fa-solid fa-leaf"></i> Health<span>App</span>
+            </a>
+        
+            <nav class="nav-links">
+                <a href="/" class="nav-item active">Главная</a>
+                <a href="#features" class="nav-item">Возможности</a>
+                <a href="#workouts" class="nav-item">Тренировки</a>
+                <a href="#recipes" class="nav-item">Рецепты</a>
+                <a href="#ai-chat" class="nav-item">ИИ Чат</a>
+            </nav>
+
+            <div class="nav-actions">
+                <a href="/users/login/" class="btn-auth-secondary">Войти</a>
+                <a href="/users/register/" class="btn-auth-primary">Регистрация</a>
+            </div>
+        </div>
+    </header>
+
+    <main>
+        {% block content %}{% endblock %}
+    </main>
+
+    <footer class="footer">
+        <div class="footer-grid">
+            <div class="footer-brand">
+                <a href="/" class="logo">Health<span>App</span></a>
+                <p>Будущее фитнеса уже здесь. Мы объединяем технологии и здоровье для твоего результата.</p>
+                <div class="footer-socials">
+                    <a href="#"><i class="fa-brands fa-telegram"></i></a>
+                    <a href="#"><i class="fa-brands fa-instagram"></i></a>
+                    <a href="#"><i class="fa-brands fa-youtube"></i></a>
+                </div>
+            </div>
+            <div class="footer-col">
+                <h4>Продукт</h4>
+                <a href="#">Тренировки</a>
+                <a href="#">Рецепты</a>
+                <a href="#">AI Помощник</a>
+            </div>
+            <div class="footer-col">
+                <h4>Сообщество</h4>
+                <a href="#">Закрытый TG канал</a>
+                <a href="#">Отзывы</a>
+                <a href="#">Блог</a>
+            </div>
+            <div class="footer-col">
+                <h4>Поддержка</h4>
+                <a href="#">Помощь</a>
+                <a href="#">Конфиденциальность</a>
+                <a href="#">Контакты</a>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>&copy; 2026 HealthApp. Made with for your health.</p>
+        </div>
+    </footer>
+
+    <script src="{% static 'js/main.js' %}"></script>
+    {% block js %}{% endblock %}
+</body>
+</html>
