@@ -1,0 +1,96 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block css %}
+<link rel="stylesheet" href="{% static 'css/register.css' %}">
+{% endblock %}
+
+{% block content %}
+<div class="auth-container">
+    <div class="auth-blob blob-1 parallax" data-speed="-2"></div>
+    <div class="auth-blob blob-2 parallax" data-speed="2"></div>
+    <div class="auth-blob blob-3 parallax" data-speed="-1"></div>
+
+    <div class="auth-card glass-card fade-scale-in">
+        
+        <div class="auth-form-wrapper" id="auth-form-wrapper">
+            <div class="auth-header">
+                <h2>Создать аккаунт</h2>
+                <p>Присоединяйся к HealthApp и начни свою трансформацию</p>
+            </div>
+
+            <form id="register-form" method="POST">
+                {% csrf_token %} <div class="input-group">
+                    <i class="fa-solid fa-user input-icon"></i>
+                    <input type="text" id="name" placeholder=" " required autocomplete="off">
+                    <label for="name">Ваше имя</label>
+                    <i class="fa-solid fa-check validation-icon"></i>
+                </div>
+
+                <div class="input-group">
+                    <i class="fa-solid fa-envelope input-icon"></i>
+                    <input type="email" id="email" placeholder=" " required autocomplete="off">
+                    <label for="email">Email адрес</label>
+                    <i class="fa-solid fa-check validation-icon"></i>
+                </div>
+
+                <div class="input-group">
+                    <i class="fa-solid fa-lock input-icon"></i>
+                    <input type="password" id="password" placeholder=" " required>
+                    <label for="password">Пароль</label>
+                    <i class="fa-regular fa-eye-slash toggle-password" id="toggle-pwd"></i>
+                </div>
+
+                <div class="input-group">
+                    <i class="fa-solid fa-shield-halved input-icon"></i>
+                    <input type="password" id="confirm_password" placeholder=" " required>
+                    <label for="confirm_password">Подтвердите пароль</label>
+                    <i class="fa-regular fa-eye-slash toggle-password" data-target="confirm_password"></i>
+                </div>
+                
+                <div class="password-strength">
+                    <div class="strength-bar" id="strength-bar"></div>
+                </div>
+
+                <div class="checkbox-group">
+                    <input type="checkbox" id="terms" required>
+                    <label for="terms" class="checkbox-label">
+                        <span class="custom-checkbox"></span>
+                        Я согласен с <a href="#" class="text-link"> условиями использования</a>
+                    </label>
+                </div>
+
+                <button type="submit" class="btn btn-primary btn-full btn-submit glow-effect btn-auth-submit" id="submit-btn">
+                    <span class="btn-text">Создать аккаунт</span>
+                    <span class="loader hidden"><i class="fa-solid fa-circle-notch fa-spin"></i></span>
+                </button>
+            </form>
+
+             <div class="auth-divider">
+                <span>или продолжить</span>
+            </div>
+            
+            <div class="social-auth">
+                <button class="btn-social"><i class="fa-brands fa-google"></i> Google</button>
+                <button class="btn-social"><i class="fa-brands fa-apple"></i> Apple</button>
+            </div>
+
+            <div class="auth-footer">
+                <p>Уже есть аккаунт? <a href="/users/login/" class="text-link">Войти</a></p>
+            </div>
+        </div>
+
+        <div class="auth-success hidden" id="auth-success">
+            <div class="success-icon-wrapper">
+                <i class="fa-solid fa-check success-icon"></i>
+            </div>
+            <h3>Аккаунт создан!</h3>
+            <p>Добро пожаловать в HealthApp. Сейчас мы перенаправим вас в личный кабинет.</p>
+        </div>
+    </div>
+</div>
+{% endblock %}
+
+{% block js %}
+<script src="{% static 'js/register.js' %}"></script>
+{% endblock %}

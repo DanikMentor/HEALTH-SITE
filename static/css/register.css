@@ -1,0 +1,195 @@
+/* --- КОНТЕЙНЕР И ФОН --- */
+.auth-container {
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    padding: 100px 20px 40px; /* Отступ под шапку */
+    overflow: hidden;
+    background: #0f0f0f;
+}
+
+/* Фоновые пятна (Blobs) */
+.auth-blob {
+    position: absolute;
+    border-radius: 50%;
+    filter: blur(100px);
+    z-index: 0;
+    opacity: 0.3;
+}
+.blob-1 { top: 10%; left: 15%; width: 400px; height: 400px; background: var(--accent); }
+.blob-2 { bottom: 10%; right: 10%; width: 300px; height: 300px; background: #008a68; }
+.blob-3 { top: 40%; left: 50%; width: 250px; height: 250px; background: #005c45; }
+
+/* --- КАРТОЧКА --- */
+.auth-card {
+    background: rgba(26, 26, 26, 0.6);
+    backdrop-filter: blur(24px);
+    -webkit-backdrop-filter: blur(24px);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    border-radius: 24px;
+    padding: 50px 40px;
+    width: 100%;
+    max-width: 480px;
+    z-index: 1;
+    box-shadow: 0 30px 60px rgba(0, 0, 0, 0.4), inset 0 1px 0 rgba(255,255,255,0.1);
+    position: relative;
+}
+
+.auth-header { text-align: center; margin-bottom: 30px; }
+.auth-header h2 { font-size: 2rem; margin-bottom: 8px; font-weight: 700; }
+.auth-header p { color: var(--text-muted); font-size: 0.95rem; }
+
+/* --- СОЦИАЛЬНЫЕ КНОПКИ --- */
+.social-auth { display: flex; gap: 15px; margin-bottom: 25px; }
+.btn-social {
+    flex: 1; padding: 12px; border-radius: 12px;
+    background: rgba(255,255,255,0.03); border: 1px solid rgba(255,255,255,0.1);
+    color: var(--text-light); font-weight: 500; cursor: pointer;
+    transition: var(--transition); display: flex; align-items: center; justify-content: center; gap: 8px;
+}
+.btn-social:hover {
+    background: rgba(255, 255, 255, 0.1);
+    border-color: var(--accent);
+    color: var(--accent);
+    transform: scale(1.1);
+}
+
+.auth-divider {
+    text-align: center; margin: 25px 0; position: relative;
+}
+.auth-divider::before {
+    content: ''; position: absolute; left: 0; top: 50%; width: 100%; height: 1px; background: rgba(255,255,255,0.1); z-index: 1;
+}
+.auth-divider span {
+    background: #191919; padding: 0 15px; color: var(--text-muted); font-size: 0.85rem; position: relative; z-index: 2; border-radius: 10px;
+}
+
+/* --- ИНПУТЫ И FLOATING LABELS --- */
+.input-group { position: relative; margin-bottom: 20px; }
+.input-icon { position: absolute; left: 16px; top: 50%; transform: translateY(-50%); color: var(--text-muted); transition: 0.3s; z-index: 2; }
+.validation-icon { position: absolute; right: 16px; top: 50%; transform: translateY(-50%); color: var(--accent); opacity: 0; transition: 0.3s; }
+
+.input-group input {
+    width: 100%; padding: 16px 45px;
+    background: rgba(0, 0, 0, 0.2); border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 14px; color: var(--text-light); font-size: 1rem;
+    transition: all 0.3s ease; outline: none;
+}
+
+.input-group label {
+    position: absolute; left: 45px; top: 50%; transform: translateY(-50%);
+    color: var(--text-muted); font-size: 1rem; pointer-events: none; transition: all 0.3s ease;
+}
+
+/* Магия фокуса и заполненного инпута */
+.input-group input:focus, .input-group input:not(:placeholder-shown) {
+    border-color: var(--accent); background: rgba(0, 200, 150, 0.05); box-shadow: 0 0 15px rgba(0, 200, 150, 0.1);
+}
+.input-group input:focus ~ label, .input-group input:not(:placeholder-shown) ~ label {
+    top: 0; font-size: 0.75rem; color: var(--accent); background: #191919; padding: 0 6px; border-radius: 4px; left: 12px;
+}
+.input-group input:focus ~ .input-icon { color: var(--accent); }
+
+.toggle-password { position: absolute; right: 16px; top: 50%; transform: translateY(-50%); color: var(--text-muted); cursor: pointer; transition: 0.3s; }
+.toggle-password:hover { color: var(--text-light); }
+
+/* --- СЛОЖНОСТЬ ПАРОЛЯ --- */
+.password-strength { height: 4px; background: rgba(255,255,255,0.1); border-radius: 2px; margin: -10px 0 20px; overflow: hidden; }
+.strength-bar { height: 100%; width: 0; background: red; transition: all 0.4s ease; border-radius: 2px; }
+.strength-weak { width: 33%; background: #ff4d4d; box-shadow: 0 0 10px #ff4d4d; }
+.strength-medium { width: 66%; background: #ffbd2e; box-shadow: 0 0 10px #ffbd2e; }
+.strength-strong { width: 100%; background: var(--accent); box-shadow: 0 0 10px var(--accent); }
+
+/* --- ЧЕКБОКС --- */
+.checkbox-group { display: flex; align-items: center; margin-bottom: 25px; }
+.checkbox-group input { display: none; }
+.checkbox-label { display: flex; align-items: center; cursor: pointer; font-size: 0.9rem; color: var(--text-muted); }
+.custom-checkbox {
+    width: 20px; height: 20px; border: 2px solid rgba(255,255,255,0.2); border-radius: 6px;
+    margin-right: 12px; display: inline-flex; justify-content: center; align-items: center; transition: 0.3s;
+}
+.checkbox-group input:checked + .checkbox-label .custom-checkbox { background: var(--accent); border-color: var(--accent); }
+.checkbox-group input:checked + .checkbox-label .custom-checkbox::after { content: '\f00c'; font-family: 'Font Awesome 6 Free'; font-weight: 900; color: #000; font-size: 12px; }
+
+/* --- КНОПКА И ССЫЛКИ --- */
+.btn-full { width: 100%; padding: 16px; font-size: 1.05rem; border-radius: 14px; position: relative; overflow: hidden; }
+.text-link { color: var(--accent); position: relative; font-weight: 500; }
+.text-link::after { content: ''; position: absolute; left: 0; bottom: -2px; width: 0; height: 1px; background: var(--accent); transition: 0.3s; }
+.text-link:hover::after { width: 100%; }
+.auth-footer { text-align: center; margin-top: 25px; font-size: 0.95rem; }
+
+.btn-auth-submit {
+    width: 100%;
+    padding: 16px;
+    border-radius: 14px;
+    border: none;
+    background: var(--accent);
+    color: #000;
+    font-weight: 700;
+    font-size: 1rem;
+    cursor: pointer;
+    position: relative;
+    overflow: hidden;
+    transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    z-index: 1;
+}
+
+.btn-auth-submit:hover {
+    box-shadow: 0 10px 30px rgba(0, 200, 150, 0.4);
+    letter-spacing: 1px;
+}
+
+.btn-auth-submit::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(
+        120deg,
+        transparent,
+        rgba(255, 255, 255, 0.3),
+        transparent
+    );
+    transition: all 0.6s;
+}
+
+.btn-auth-submit:hover::before {
+    left: 100%;
+}
+
+.btn-glow {
+    position: absolute;
+    top: 0; left: 0; width: 100%; height: 100%;
+    background: var(--accent);
+    filter: blur(20px);
+    opacity: 0;
+    z-index: -1;
+    transition: 0.4s;
+}
+
+.btn-auth-submit:hover .btn-glow {
+    opacity: 0.5;
+}
+
+/* --- СОСТОЯНИЕ УСПЕХА --- */
+.auth-success { text-align: center; padding: 40px 0; animation: fadeIn 0.5s ease forwards; }
+.success-icon-wrapper {
+    width: 80px; height: 80px; border-radius: 50%; background: rgba(0, 200, 150, 0.1);
+    display: flex; align-items: center; justify-content: center; margin: 0 auto 20px;
+    border: 2px solid var(--accent); box-shadow: 0 0 30px rgba(0, 200, 150, 0.3);
+}
+.success-icon { font-size: 2.5rem; color: var(--accent); }
+
+/* --- АНИМАЦИИ И ОШИБКИ --- */
+.fade-scale-in { animation: fadeScale 0.6s cubic-bezier(0.16, 1, 0.3, 1) forwards; }
+@keyframes fadeScale { 0% { opacity: 0; transform: scale(0.95) translateY(20px); } 100% { opacity: 1; transform: scale(1) translateY(0); } }
+
+.error-shake { animation: shake 0.4s ease-in-out; }
+@keyframes shake { 0%, 100% { transform: translateX(0); } 25% { transform: translateX(-8px); } 75% { transform: translateX(8px); } }
+.input-error input { border-color: #ff4d4d !important; box-shadow: 0 0 15px rgba(255, 77, 77, 0.2) !important; }
+
+.hidden { display: none !important; }
