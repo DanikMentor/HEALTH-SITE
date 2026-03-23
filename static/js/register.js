@@ -52,9 +52,6 @@ document.addEventListener("DOMContentLoaded", () => {
 
     form.addEventListener('submit', (e) => {
         e.preventDefault(); // Останавливаем стандартную отправку
-
-        // Простая проверка (например, совпадает ли пароль)
-        // В реальном Django проекте данные полетят на сервер, но для UI мы сделаем красоту:
         
         // Включаем спиннер
         submitBtn.disabled = true;
@@ -67,13 +64,9 @@ document.addEventListener("DOMContentLoaded", () => {
             formWrapper.classList.add('hidden');
             successWrapper.classList.remove('hidden');
             
-            // Если нужно, тут можно сделать реальный редирект через 2 сек:
-            // window.location.href = '/users/profile/';
         }, 2000);
     });
 
-    // Анимация ошибки для примера (добавь класс .error-shake и .input-error к .input-group при неверном вводе)
-    // Это пригодится тебе, когда будешь связывать форму с Django Views
 });
 
 document.addEventListener("DOMContentLoaded", () => {

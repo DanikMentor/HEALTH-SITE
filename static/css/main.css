@@ -1,4 +1,4 @@
-/* --- ПЕРЕМЕННЫЕ (Design System 2025) --- */
+/* ПЕРЕМЕННЫЕ */
 :root {
     --bg-main: #0a0a0a;
     --bg-secondary: #141414;
@@ -13,7 +13,7 @@
     --radius: 16px;
 }
 
-/* --- БАЗОВЫЕ НАСТРОЙКИ --- */
+/* БАЗОВЫЕ НАСТРОЙКИ */
 * {
     margin: 0;
     padding: 0;
@@ -31,7 +31,7 @@ body {
 a { text-decoration: none; color: inherit; }
 ul { list-style: none; }
 
-/* --- УТИЛИТЫ --- */
+/* УТИЛИТЫ */
 .text-gradient {
     background: linear-gradient(90deg, #ffffff, var(--accent));
     -webkit-background-clip: text;
@@ -165,9 +165,7 @@ ul { list-style: none; }
     transition: var(--transition);
 }
 
-/* --- NAVBAR --- */
-
-/* --- 1. ФИКСИРОВАННАЯ И ТОЛСТАЯ ШАПКА --- */
+/* ФИКСИРОВАННАЯ И ТОЛСТАЯ ШАПКА */
 .navbar-fixed {
     position: fixed;
     top: 0;
@@ -183,7 +181,7 @@ ul { list-style: none; }
     transition: all 0.4s ease;
 }
 
-/* Эффект при скролле (становится чуть меньше и темнее) */
+/* Эффект при скролле */
 .navbar.scrolled {
     height: 75px;
     background: rgba(5, 5, 5, 0.95);
@@ -233,7 +231,7 @@ ul { list-style: none; }
 
 
 
-/* --- HERO СЕКЦИЯ --- */
+/* HERO СЕКЦИЯ */
 .hero {
     height: 100vh;
     display: flex; align-items: center; justify-content: center;
@@ -259,7 +257,7 @@ ul { list-style: none; }
 .el-2 { bottom: 30%; right: 10%; }
 .el-3 { top: 40%; right: 20%; font-size: 4rem;}
 
-/* --- ФИЧИ --- */
+/* ФИЧИ */
 .features { padding: 100px 20px; max-width: 1200px; margin: 0 auto; text-align: center; }
 .section-header { margin-bottom: 60px; }
 .section-header h2 { font-size: 2.5rem; margin-bottom: 10px; }
@@ -282,7 +280,7 @@ ul { list-style: none; }
 }
 .feature-card:hover .icon-wrapper { background: var(--accent); color: #000; }
 
-/* --- СТАТИСТИКА --- */
+/* СТАТИСТИКА */
 .stats-grid {
     max-width: 1200px;
     margin: 0 auto;
@@ -309,7 +307,7 @@ ul { list-style: none; }
 }
 .stat-item h3 { font-size: 3rem; color: var(--accent); display: inline-block; margin-bottom: 10px; }
 
-/* --- AI CHAT DEMO --- */
+/* AI CHAT */
 .ai-chat-section {
     padding: 100px 20px; max-width: 1200px; margin: 0 auto;
     display: grid; grid-template-columns: 1fr 1fr; gap: 60px; align-items: center;
@@ -329,7 +327,7 @@ ul { list-style: none; }
 .ai-msg { background: rgba(0, 200, 150, 0.1); border: 1px solid rgba(0,200,150,0.2); align-self: flex-start; border-bottom-left-radius: 4px; color: #fff;}
 .cursor { animation: blink 1s infinite; font-weight: bold; }
 
-/* --- РАЗДЕЛИТЕЛИ БЛОКОВ --- */
+/* РАЗДЕЛИТЕЛИ БЛОКОВ */
 .section-divider {
     position: relative;
     padding: 140px 20px; /* Увеличили отступы */
@@ -365,7 +363,7 @@ section {
     padding: 100px 0;
 }
 
-/* --- CTA --- */
+/* CTA */
 
 .premium-glow {
     border: 1px solid rgba(0, 200, 150, 0.3);
@@ -421,7 +419,7 @@ section {
 }
 
 
-/* --- FOOTER --- */
+/* FOOTER */
 .footer { border-top: 1px solid var(--border-color); padding: 60px 20px 20px; margin-top: 50px; text-align: center; }
 .footer-logo h2 { font-size: 2rem; }
 .footer-logo span { color: var(--accent); }
@@ -430,13 +428,13 @@ section {
 .footer-links a:hover { color: var(--accent); }
 .footer-bottom { border-top: 1px solid var(--border-color); padding-top: 20px; color: var(--text-muted); font-size: 0.9rem; }
 
-/* --- АНИМАЦИИ --- */
+/* АНИМАЦИИ */
 .fade-up { opacity: 0; transform: translateY(40px); transition: 0.8s cubic-bezier(0.25, 0.8, 0.25, 1); }
 .fade-up.visible { opacity: 1; transform: translateY(0); }
 @keyframes pulse { 0% { transform: translate(-50%, -50%) scale(1); } 100% { transform: translate(-50%, -50%) scale(1.1); } }
 @keyframes blink { 0%, 100% { opacity: 1; } 50% { opacity: 0; } }
 
-/* --- АДАПТИВНОСТЬ --- */
+/* АДАПТИВНОСТЬ */
 @media (max-width: 768px) {
     .hero-title { font-size: 2.8rem; }
     .hero-buttons { flex-direction: column; }
@@ -444,7 +442,7 @@ section {
     .nav-links { display: none; /* Для моб. версии нужен бургер, скрываем пока */ }
 }
 
-/* --- ОБНОВЛЕННЫЙ NAVBAR (По краям) --- */
+/* ОБНОВЛЕННЫЙ NAVBAR */
 .nav-container-fluid {
     width: 100%;
     padding: 0 50px; /* Отступы от краев экрана */
@@ -454,11 +452,11 @@ section {
 }
 
 
-/* --- СПЕЙСИНГ СЕКЦИЙ --- */
+/*СПЕЙСИНГ СЕКЦИЙ */
 .section-padding { padding: 120px 20px; }
 .stats-section { padding: 80px 20px; background: rgba(255,255,255,0.02); }
 
-/* --- ОБНОВЛЕННЫЙ CTA (Premium Look) --- */
+/* ОБНОВЛЕННЫЙ CTA */
 .cta-card {
     max-width: 1100px;
     margin: 0 auto;
@@ -487,7 +485,7 @@ section {
     filter: blur(80px);
 }
 
-/* --- ПРОФЕССИОНАЛЬНЫЙ FOOTER --- */
+/* FOOTER */
 .footer {
     padding: 100px 50px 40px;
     background: #050505;
