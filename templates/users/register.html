@@ -56,7 +56,7 @@
                     <input type="checkbox" id="terms" required>
                     <label for="terms" class="checkbox-label">
                         <span class="custom-checkbox"></span>
-                        Я согласен с <a href="#" class="text-link"> условиями использования</a>
+                        Я согласен с &nbsp;<a href="#" class="text-link"> условиями использования</a>
                     </label>
                 </div>
 
@@ -76,7 +76,7 @@
             </div>
 
             <div class="auth-footer">
-                <p>Уже есть аккаунт? <a href="/users/login/" class="text-link">Войти</a></p>
+                <p>Уже есть аккаунт? <a href="{% url 'login' %}" class="text-link">Войти</a></p>
             </div>
         </div>
 
