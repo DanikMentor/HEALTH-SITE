@@ -32,10 +32,6 @@
     <main class="main-content">
         <header class="dash-header fade-up">
             <button class="burger-btn" id="burger-btn"><i class="fa-solid fa-bars"></i></button>
-            <div class="header-search">
-                <i class="fa-solid fa-magnifying-glass"></i>
-                <input type="text" placeholder="Поиск тренировок, рецептов...">
-            </div>
             <div class="user-profile">
                 <div class="user-info">
                     <h4>Алекс Фит</h4>
@@ -47,8 +43,7 @@
             </div>
         </header>
 
-        <div class="dash-container">
-            
+        <div class="dash-container section active" id="dashboard-section">
             <div class="dash-card ai-card fade-up delay-1">
                 <div class="ai-header">
                     <i class="fa-solid fa-robot pulse-icon"></i> 
@@ -60,81 +55,162 @@
             <div class="stats-grid fade-up delay-2">
                 <div class="stat-card glass-card">
                     <div class="stat-icon icon-orange"><i class="fa-solid fa-fire"></i></div>
-                    <div class="stat-info">
-                        <p>Калории</p>
-                        <h3 class="count-up" data-target="1850">0</h3><span> ккал</span>
-                    </div>
+                    <div class="stat-info"><p>Калории</p><h3 class="count-up" data-target="1850">0</h3><span> ккал</span></div>
                 </div>
                 <div class="stat-card glass-card">
                     <div class="stat-icon icon-green"><i class="fa-solid fa-dumbbell"></i></div>
-                    <div class="stat-info">
-                        <p>Тренировки</p>
-                        <h3 class="count-up" data-target="4">0</h3><span> / нед</span>
-                    </div>
+                    <div class="stat-info"><p>Тренировки</p><h3 class="count-up" data-target="4">0</h3><span> / нед</span></div>
                 </div>
                 <div class="stat-card glass-card">
                     <div class="stat-icon icon-blue"><i class="fa-solid fa-scale-balanced"></i></div>
-                    <div class="stat-info">
-                        <p>Текущий вес</p>
-                        <h3 class="count-up" data-target="76.5">0</h3><span> кг</span>
-                    </div>
+                    <div class="stat-info"><p>Текущий вес</p><h3 class="count-up" data-target="76.5">0</h3><span> кг</span></div>
                 </div>
                 <div class="stat-card glass-card">
                     <div class="stat-icon icon-purple"><i class="fa-solid fa-droplet"></i></div>
-                    <div class="stat-info">
-                        <p>Вода</p>
-                        <h3 class="count-up" data-target="2.1">0</h3><span> л</span>
-                    </div>
+                    <div class="stat-info"><p>Вода</p><h3 class="count-up" data-target="2.1">0</h3><span> л</span></div>
                 </div>
             </div>
 
             <div class="main-grid fade-up delay-3">
                 <div class="dash-card glass-card goals-card">
                     <h3>🎯 Мои цели</h3>
-                    
                     <div class="goal-item">
-                        <div class="goal-info">
-                            <span>Сбросить 5 кг</span>
-                            <span>60%</span>
-                        </div>
-                        <div class="progress-bar-bg">
-                            <div class="progress-fill" data-width="60%"></div>
-                        </div>
+                        <div class="goal-info"><span>Сбросить 5 кг</span><span>60%</span></div>
+                        <div class="progress-bar-bg"><div class="progress-fill" data-width="60%"></div></div>
                     </div>
-
                     <div class="goal-item">
-                        <div class="goal-info">
-                            <span>Пить 3л воды в день</span>
-                            <span>70%</span>
-                        </div>
-                        <div class="progress-bar-bg">
-                            <div class="progress-fill" data-width="70%"></div>
-                        </div>
+                        <div class="goal-info"><span>Пить 3л воды в день</span><span>70%</span></div>
+                        <div class="progress-bar-bg"><div class="progress-fill" data-width="70%"></div></div>
                     </div>
                 </div>
-
                 <div class="dash-card glass-card activity-card">
                     <h3>⚡ Последняя активность</h3>
                     <div class="activity-list">
                         <div class="activity-item">
                             <div class="activity-icon"><i class="fa-solid fa-person-running"></i></div>
-                            <div class="activity-text">
-                                <h4>Кардио сессия</h4>
-                                <p>Сегодня, 08:30 • 300 ккал</p>
-                            </div>
+                            <div class="activity-text"><h4>Кардио сессия</h4><p>Сегодня, 08:30 • 300 ккал</p></div>
                         </div>
                         <div class="activity-item">
                             <div class="activity-icon"><i class="fa-solid fa-bowl-food"></i></div>
-                            <div class="activity-text">
-                                <h4>Завтрак: Овсянка</h4>
-                                <p>Сегодня, 09:15 • 450 ккал</p>
-                            </div>
+                            <div class="activity-text"><h4>Завтрак: Овсянка</h4><p>Сегодня, 09:15 • 450 ккал</p></div>
                         </div>
                     </div>
                 </div>
             </div>
+        </div> 
 
-        </div>
+        <div class="dash-container section hidden" id="profile-section">
+            
+            <div class="profile-hero glass-card fade-up">
+                <div class="hero-content">
+                    <div class="avatar-container">
+                        <img src="https://ui-avatars.com/api/?name=Alex+Fit&background=00c896&color=fff&size=150" alt="User" class="main-avatar">
+                        <button class="edit-avatar-btn"><i class="fa-solid fa-pen"></i></button>
+                    </div>
+                    <div class="hero-text">
+                        <h1>Алекс Фит <i class="fa-solid fa-circle-check verify-badge"></i></h1>
+                        <p>Уровень: <span>Продвинутый атлет</span></p>
+                        <div class="hero-badges">
+                            <span class="h-badge"><i class="fa-solid fa-calendar"></i> 42 дня в строю</span>
+                            <span class="h-badge"><i class="fa-solid fa-fire"></i> 12к ккал сожжено</span>
+                        </div>
+                    </div>
+                </div>
+                <button class="btn-premium" id="toggle-edit-mode">
+                    <i class="fa-solid fa-user-gear"></i> Редактировать профиль
+                </button>
+            </div>
+
+            <div class="profile-grid-layout">
+                
+                <div class="profile-column-main">
+                    <div class="info-card glass-card fade-up" id="profile-view-card">
+                        <div class="card-header"><h3><i class="fa-solid fa-id-card"></i> Личная информация</h3></div>
+                        <div class="data-grid">
+                            <div class="data-item"><label>Email</label><p>alex@healthapp.com</p></div>
+                            <div class="data-item"><label>Телефон</label><p>+7 (999) 000-11-22</p></div>
+                            <div class="data-item"><label>Дата рождения</label><p>15 мая 1995</p></div>
+                            <div class="data-item"><label>Город</label><p>Москва</p></div>
+                        </div>
+                    </div>
+
+                    <div class="info-card glass-card fade-up hidden" id="profile-edit-form">
+                        <div class="card-header">
+                            <h3><i class="fa-solid fa-user-pen"></i> Изменение данных</h3>
+                            <button class="close-edit" id="cancel-edit">&times;</button>
+                        </div>
+                        <form>
+                            <div class="input-row">
+                                <div class="input-field">
+                                    <label><i class="fa-solid fa-user"></i> Имя</label>
+                                    <input type="text" value="Алекс" placeholder="Введите имя">
+                                </div>
+                                <div class="input-field">
+                                    <label>Фамилия</label>
+                                    <input type="text" value="Фит" placeholder="Введите фамилию">
+                                </div>
+                            </div>
+
+                            <div class="input-field">
+                                <label><i class="fa-solid fa-envelope"></i> Email адрес</label>
+                                <input type="email" value="alex@healthapp.com" placeholder="example@mail.com">
+                            </div>
+
+                            <div class="input-row">
+                                <div class="input-field">
+                                    <label><i class="fa-solid fa-phone"></i> Телефон</label>
+                                    <input type="tel" value="+7 (999) 000-11-22" placeholder="+7 (___) ___-__-__">
+                                </div>
+                                <div class="input-field">
+                                    <label><i class="fa-solid fa-calendar-days"></i> Дата рождения</label>
+                                    <input type="date" value="1995-05-15">
+                                </div>
+                            </div>
+
+                            <button type="submit" class="save-btn">
+                                <i class="fa-solid fa-floppy-disk"></i> Сохранить изменения
+                            </button>
+                        </form>
+                    </div>
+
+                    <div class="info-card glass-card fade-up">
+                        <div class="card-header"><h3><i class="fa-solid fa-weight-scale"></i> Антропометрия</h3></div>
+                        <div class="metrics-row">
+                            <div class="metric-box"><span class="m-val">182</span><span class="m-unit">см</span><p>Рост</p></div>
+                            <div class="metric-box"><span class="m-val">76.5</span><span class="m-unit">кг</span><p>Вес</p></div>
+                            <div class="metric-box"><span class="m-val">14</span><span class="m-unit">%</span><p>Жир</p></div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="profile-column-side">
+                    <div class="info-card glass-card fade-up achievements-section">
+                        <div class="card-header">
+                            <h3><i class="fa-solid fa-medal"></i> Достижения</h3>
+                            <span class="ach-count">3 / 8</span>
+                        </div>
+                        <div class="achievements-showcase">
+                            <div class="ach-hex unlocked" title="7 дней шагов"><div class="hex-content"><i class="fa-solid fa-person-walking ach-icon"></i><span class="ach-title">Ходок</span></div><div class="hex-glow"></div></div>
+                            <div class="ach-hex unlocked" title="Первая тренировка"><div class="hex-content"><i class="fa-solid fa-dumbbell ach-icon"></i><span class="ach-title">Сила</span></div><div class="hex-glow"></div></div>
+                            <div class="ach-hex unlocked" title="Норма воды"><div class="hex-content"><i class="fa-solid fa-droplet ach-icon"></i><span class="ach-title">Аква</span></div><div class="hex-glow"></div></div>
+                            <div class="ach-hex locked" title="Закрыто"><div class="hex-content"><i class="fa-solid fa-lock lock-icon"></i><span class="ach-title">Цель</span></div></div>
+                        </div>
+                    </div>
+
+                    <div class="info-card glass-card fade-up">
+                        <h3><i class="fa-solid fa-lock"></i> Аккаунт</h3>
+                        <div class="setting-action">
+                            <div><p class="s-title">Пароль</p><p class="s-desc">Изменен 3 мес. назад</p></div>
+                            <button class="action-btn">Изменить</button>
+                        </div>
+                        <div class="setting-action">
+                            <div><p class="s-title">2FA Защита</p></div>
+                            <label class="switch"><input type="checkbox"><span class="slider"></span></label>
+                        </div>
+                    </div>
+                </div>
+            </div> 
+        </div> 
     </main>
 </div>
 {% endblock %}
