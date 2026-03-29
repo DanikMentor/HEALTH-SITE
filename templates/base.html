@@ -22,7 +22,7 @@
                 <a href="#features" class="nav-item">Возможности</a>
                 <a href="#workouts" class="nav-item">Тренировки</a>
                 <a href="#recipes" class="nav-item">Рецепты</a>
-                <a href="#ai-chat" class="nav-item">ИИ Чат</a>
+                <a href="{% url 'ai_chat' %}" class="nav-item">ИИ Чат</a>
             </nav>
 
             <div class="nav-actions">
@@ -31,6 +31,11 @@
             </div>
         </div>
     </header>
+
+    <div class="sidebar"> 
+        </div>
+    <div class="header"> 
+        </div>
 
     <main>
         {% block content %}{% endblock %}

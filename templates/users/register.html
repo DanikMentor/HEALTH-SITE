@@ -22,28 +22,28 @@
             <form id="register-form" method="POST">
                 {% csrf_token %} <div class="input-group">
                     <i class="fa-solid fa-user input-icon"></i>
-                    <input type="text" id="name" placeholder=" " required autocomplete="off">
+                    <input type="text" id="name" name="username" placeholder=" " required autocomplete="off">
                     <label for="name">Ваше имя</label>
                     <i class="fa-solid fa-check validation-icon"></i>
                 </div>
 
                 <div class="input-group">
                     <i class="fa-solid fa-envelope input-icon"></i>
-                    <input type="email" id="email" placeholder=" " required autocomplete="off">
+                    <input type="email" id="email" name="email" placeholder=" " required autocomplete="off">
                     <label for="email">Email адрес</label>
                     <i class="fa-solid fa-check validation-icon"></i>
                 </div>
 
                 <div class="input-group">
                     <i class="fa-solid fa-lock input-icon"></i>
-                    <input type="password" id="password" placeholder=" " required>
+                    <input type="password" id="password" name="password" placeholder=" " required>
                     <label for="password">Пароль</label>
                     <i class="fa-regular fa-eye-slash toggle-password" id="toggle-pwd"></i>
                 </div>
 
                 <div class="input-group">
                     <i class="fa-solid fa-shield-halved input-icon"></i>
-                    <input type="password" id="confirm_password" placeholder=" " required>
+                    <input type="password" id="confirm_password" name="password_confirm" placeholder=" " required>
                     <label for="confirm_password">Подтвердите пароль</label>
                     <i class="fa-regular fa-eye-slash toggle-password" data-target="confirm_password"></i>
                 </div>

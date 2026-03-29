@@ -13,20 +13,29 @@
             <i class="fa-solid fa-leaf">&nbsp;HealthApp</i> 
             <button class="close-sidebar" id="close-sidebar"><i class="fa-solid fa-xmark"></i></button>
         </div>
-        
+    
         <nav class="sidebar-nav">
-            <a href="#" class="nav-item active"><i class="fa-solid fa-border-all"></i> Дашборд</a>
-            <a href="#" class="nav-item"><i class="fa-solid fa-user"></i> Профиль</a>
+            <a href="{% url 'profile' %}" class="nav-item active"><i class="fa-solid fa-border-all"></i> Дашборд</a>
+            <a href="{% url 'profile' %}" class="nav-item"><i class="fa-solid fa-user"></i> Профиль</a>
             <a href="#" class="nav-item"><i class="fa-solid fa-fire"></i> Тренировки</a>
             <a href="#" class="nav-item"><i class="fa-solid fa-utensils"></i> Рецепты</a>
             <a href="#" class="nav-item"><i class="fa-solid fa-book"></i> Дневник</a>
-            <a href="#" class="nav-item ai-nav"><i class="fa-solid fa-robot"></i> AI Чат <span class="badge">PRO</span></a>
+            <a href="{% url 'ai_chat' %}" class="nav-item bypass-js">
+                <i class="fa-solid fa-robot"></i> 
+                <span class="nav-text">AI Чат</span>
+                <span class="badge-pro">PRO</span>
+            </a>
+
+
             <a href="#" class="nav-item"><i class="fa-solid fa-gear"></i> Настройки</a>
         </nav>
-
+        
         <div class="sidebar-footer">
-            <a href="{% url 'home' %}" class="nav-item logout-btn"><i class="fa-solid fa-arrow-right-from-bracket"></i> Выйти</a>
+            <a href="{% url 'index' %}" class="nav-item logout-btn bypass-js">
+                <i class="fa-solid fa-arrow-right-from-bracket"></i> Выйти
+            </a>
         </div>
+        
     </aside>
 
     <main class="main-content">
@@ -34,11 +43,11 @@
             <button class="burger-btn" id="burger-btn"><i class="fa-solid fa-bars"></i></button>
             <div class="user-profile">
                 <div class="user-info">
-                    <h4>Алекс Фит</h4>
-                    <p>alex@healthapp.com</p>
+                    <h4>{{ user.username }}</h4>
+                    <p>{{ user.email }}</p>
                 </div>
                 <div class="avatar-glow">
-                    <img src="https://ui-avatars.com/api/?name=Alex+Fit&background=00c896&color=fff" alt="Avatar" class="avatar">
+                    <img src="https://ui-avatars.com/api/?name={{ user.username }}&background=00c896&color=fff" alt="Avatar" class="avatar">
                 </div>
             </div>
         </header>
@@ -104,11 +113,11 @@
             <div class="profile-hero glass-card fade-up">
                 <div class="hero-content">
                     <div class="avatar-container">
-                        <img src="https://ui-avatars.com/api/?name=Alex+Fit&background=00c896&color=fff&size=150" alt="User" class="main-avatar">
+                        <img src="https://ui-avatars.com/api/?name={{ user.username }}&background=00c896&color=fff" alt="Avatar" class="avatar">
                         <button class="edit-avatar-btn"><i class="fa-solid fa-pen"></i></button>
                     </div>
                     <div class="hero-text">
-                        <h1>Алекс Фит <i class="fa-solid fa-circle-check verify-badge"></i></h1>
+                        <h1>{{user.username}} <i class="fa-solid fa-circle-check verify-badge"></i></h1>
                         <p>Уровень: <span>Продвинутый атлет</span></p>
                         <div class="hero-badges">
                             <span class="h-badge"><i class="fa-solid fa-calendar"></i> 42 дня в строю</span>
@@ -127,7 +136,7 @@
                     <div class="info-card glass-card fade-up" id="profile-view-card">
                         <div class="card-header"><h3><i class="fa-solid fa-id-card"></i> Личная информация</h3></div>
                         <div class="data-grid">
-                            <div class="data-item"><label>Email</label><p>alex@healthapp.com</p></div>
+                            <div class="data-item"><label>Email</label><p>{{user.email}}</p></div>
                             <div class="data-item"><label>Телефон</label><p>+7 (999) 000-11-22</p></div>
                             <div class="data-item"><label>Дата рождения</label><p>15 мая 1995</p></div>
                             <div class="data-item"><label>Город</label><p>Москва</p></div>
@@ -142,17 +151,17 @@
                         <form>
                             <div class="input-row">
                                 <div class="input-field">
-                                    <label><i class="fa-solid fa-user"></i> Имя</label>
+                                    <label><i class="fa-solid fa-user"></i> {{user.username}}</label>
                                     <input type="text" value="Алекс" placeholder="Введите имя">
                                 </div>
                                 <div class="input-field">
-                                    <label>Фамилия</label>
+                                    <label>????</label>
                                     <input type="text" value="Фит" placeholder="Введите фамилию">
                                 </div>
                             </div>
 
                             <div class="input-field">
-                                <label><i class="fa-solid fa-envelope"></i> Email адрес</label>
+                                <label><i class="fa-solid fa-envelope"></i> {{user.email}}</label>
                                 <input type="email" value="alex@healthapp.com" placeholder="example@mail.com">
                             </div>
 

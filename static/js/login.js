@@ -50,28 +50,28 @@ document.addEventListener("DOMContentLoaded", () => {
     const formWrapper = document.getElementById('auth-form-wrapper');
     const successWrapper = document.getElementById('auth-success');
 
-    form.addEventListener('submit', (e) => {
-    e.preventDefault(); // Останавливаем перезагрузку, чтобы показать анимацию
+    //form.addEventListener('submit', (e) => {
+    //e.preventDefault(); // Останавливаем перезагрузку, чтобы показать анимацию
 
     // 1. Показываем спиннер на кнопке
-    submitBtn.disabled = true;
-    btnText.classList.add('hidden'); // Текст "Создать аккаунт" исчезает
-    loader.classList.remove('hidden'); // Появляется иконка загрузки
+    //submitBtn.disabled = true;
+    //btnText.classList.add('hidden'); // Текст "Создать аккаунт" исчезает
+    //loader.classList.remove('hidden'); // Появляется иконка загрузки
 
     // 2. Имитируем задержку "отправки" (например, 1.5 секунды)
-    setTimeout(() => {
+    //setTimeout(() => {
         // Скрываем форму целиком
-        formWrapper.classList.add('hidden');
+        //formWrapper.classList.add('hidden');
         // Показываем блок с галочкой успеха
-        successWrapper.classList.remove('hidden');
+        //successWrapper.classList.remove('hidden');
         
         // 3. Через 3 секунды после появления галочки — переходим в кабинет
-        setTimeout(() => {
-            window.location.href = '/profile/'; 
-        }, 3000);
+        //setTimeout(() => {
+            //window.location.href = '/profile/'; 
+        //}, 3000);
 
-    }, 1500);
-    });
+    //}, 1500);
+    //});
 
 });
 

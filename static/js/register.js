@@ -51,7 +51,7 @@ document.addEventListener("DOMContentLoaded", () => {
     const successWrapper = document.getElementById('auth-success');
 
     form.addEventListener('submit', (e) => {
-    e.preventDefault(); // Останавливаем перезагрузку, чтобы показать анимацию
+    //e.preventDefault(); // Останавливаем перезагрузку, чтобы показать анимацию 
 
     // 1. Показываем спиннер на кнопке
     submitBtn.disabled = true;

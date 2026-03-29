@@ -8,34 +8,41 @@ document.addEventListener("DOMContentLoaded", () => {
         item.addEventListener('click', (e) => {
             const targetName = item.innerText.trim();
             
-            // Если это выход — не прерываем переход по ссылке
-            if(targetName === 'Выйти') return; 
+            // ИСКЛЮЧЕНИЯ: Если это выход или AI Чат — даем ссылке сработать штатно
+            // Также добавили проверку класса bypass-js для надежности
+            if (targetName === 'Выйти' || 
+                targetName.includes('AI Чат') || 
+                item.classList.contains('bypass-js')) {
+                return; // Скрипт просто завершается, переход по ссылке происходит
+            }
             
+            // Для "Профиля" и "Дашборда" блокируем перезагрузку
             e.preventDefault();
 
             // Убираем активный класс у всех ссылок и даем нажатой
             navItems.forEach(nav => nav.classList.remove('active'));
             item.classList.add('active');
 
-            // Скрываем все секции МГНОВЕННО (чтобы не занимали место)
+            // Скрываем все секции
             sections.forEach(sec => {
                 sec.classList.remove('active');
-                sec.classList.add('hidden'); // hidden должен иметь display: none !important в CSS
+                sec.classList.add('hidden');
             });
 
-            // Определяем, какую секцию открыть
+            // Логика выбора: Профиль или Дашборд
             let targetId = (targetName === "Профиль") ? 'profile-section' : 'dashboard-section';
             const targetSection = document.getElementById(targetId);
 
             if (targetSection) {
                 targetSection.classList.remove('hidden');
-                // Задержка 10мс нужна, чтобы браузер успел применить display: block перед началом анимации
                 setTimeout(() => {
                     targetSection.classList.add('active');
                 }, 10);
             }
         });
     });
+
+    // ... дальше твой остальной код (Тайпинг, Счетчики и т.д.) без изменений ...
 
     // === 2. ЭФФЕКТ ПЕЧАТИ AI (ТВОЙ КОД) ===
     const aiTextElement = document.getElementById('ai-typing-text');

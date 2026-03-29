@@ -1,0 +1,252 @@
+{% extends 'base.html' %}/* made by Arsēnijs Kopačs
+{% load static %}
+
+{% block css %}
+<link rel="stylesheet" href="{% static 'css/profile.css' %}">
+<style>
+    /* Стили для окна чата внутри основного контента */
+    .chat-container-inner {
+        display: flex;
+        flex-direction: column;
+        height: calc(100vh - 160px); /* Подгонка под высоту экрана */
+        gap: 20px;
+    }
+
+    .chat-window {
+        flex-grow: 1;
+        background: rgba(255, 255, 255, 0.05); /* Стеклянный эффект как в профиле */
+        backdrop-filter: blur(10px);
+        border-radius: 15px;
+        padding: 20px;
+        overflow-y: auto;
+        border: 1px solid rgba(255, 255, 255, 0.1);
+        display: flex;
+        flex-direction: column;
+        gap: 15px;
+    }
+
+    .message {
+        max-width: 80%;
+        padding: 12px 18px;
+        border-radius: 15px;
+        line-height: 1.5;
+    }
+
+    .user-message {
+        align-self: flex-end;
+        background: #2d2d2d;
+        color: #eee;
+    }
+
+    .ai-message {
+        align-self: flex-start;
+        background: rgba(0, 255, 163, 0.1);
+        border: 1px solid #00ffa3;
+        color: #00ffa3;
+    }
+
+    .input-group {
+        display: flex;
+        gap: 10px;
+        background: rgba(255, 255, 255, 0.05);
+        padding: 15px;
+        border-radius: 12px;
+        border: 1px solid rgba(255, 255, 255, 0.1);
+    }
+
+    .chat-input {
+        flex-grow: 1;
+        background: transparent;
+        border: 1px solid #444;
+        border-radius: 8px;
+        padding: 12px;
+        color: white;
+        outline: none;
+    }
+
+    .chat-input:focus {
+        border-color: #00ffa3;
+    }
+
+    .send-btn {
+        background: #00ffa3;
+        color: black;
+        border: none;
+        padding: 0 25px;
+        border-radius: 8px;
+        font-weight: 600;
+        cursor: pointer;
+        transition: 0.3s;
+    }
+
+    .send-btn:hover {
+        background: #00d688;
+        transform: translateY(-2px);
+    }
+</style>
+{% endblock %}
+
+{% block content %}
+<div class="dashboard-layout">
+    
+    <aside class="sidebar" id="sidebar">
+        <div class="sidebar-logo">
+            <i class="fa-solid fa-leaf">&nbsp;HealthApp</i> 
+            <button class="close-sidebar" id="close-sidebar"><i class="fa-solid fa-xmark"></i></button>
+        </div>
+    
+        <nav class="sidebar-nav">
+            <a href="{% url 'profile' %}" class="nav-item bypass-js">
+                <i class="fa-solid fa-border-all"></i> Дашборд
+            </a>
+    
+            <a href="{% url 'profile' %}" class="nav-item bypass-js">
+                <i class="fa-solid fa-user"></i> Профиль
+            </a>
+
+            <a href="{% url 'profile' %}" class="nav-item bypass-js">
+                <i class="fa-solid fa-fire"></i> Тренировки
+            </a>
+
+            <a href="{% url 'profile' %}" class="nav-item bypass-js">
+                <i class="fa-solid fa-utensils"></i> Рецепты
+            </a>
+
+            <a href="{% url 'profile' %}" class="nav-item bypass-js">
+                <i class="fa-solid fa-book"></i> Дневник
+            </a>
+
+            <a href="{% url 'ai_chat' %}" class="nav-item active bypass-js">
+                <i class="fa-solid fa-robot"></i> 
+                <span class="nav-text">AI Чат</span>
+                <span class="badge-pro">PRO</span>
+            </a>
+
+            <a href="{% url 'profile' %}" class="nav-item bypass-js">
+                <i class="fa-solid fa-gear"></i> Настройки
+            </a>
+        </nav>
+        
+        
+        <div class="sidebar-footer">
+            <a href="{% url 'index' %}" class="nav-item logout-btn bypass-js">
+                <i class="fa-solid fa-arrow-right-from-bracket"></i> Выйти
+            </a>
+        </div>
+        
+    </aside>
+
+    <main class="main-content">
+        <header class="dash-header fade-up">
+            <button class="burger-btn" id="burger-btn"><i class="fa-solid fa-bars"></i></button>
+            <div class="user-profile">
+                <div class="user-info">
+                    <h4>{{ user.username }}</h4>
+                    <p>{{ user.email }}</p>
+                </div>
+                <div class="avatar-glow">
+                    <img src="https://ui-avatars.com/api/?name={{ user.username }}&background=00c896&color=fff" alt="Avatar" class="avatar">
+                </div>
+            </div>
+        </header>
+
+        <div class="dash-container section active">
+            <div class="chat-container-inner fade-up delay-1">
+                <div class="card-header">
+                    <h3><i class="fa-solid fa-robot"></i> AI Тренер <span class="badge-pro" style="background: #00ffa3; color: black; padding: 2px 8px; border-radius: 4px; font-size: 12px; margin-left: 10px;">PRO</span></h3>
+                </div>
+
+                <div id="chat-window" class="chat-window">
+                    <div class="message ai-message">
+                        Привет! Я твой AI-тренер. Чем могу помочь сегодня?
+                    </div>
+                </div>
+
+                <div class="input-group">
+                    <input type="text" id="user-input" class="chat-input" placeholder="Введите сообщение..." onkeypress="if(event.key==='Enter') sendMessage()">
+                    <button onclick="sendMessage()" class="send-btn">
+                        <i class="fa-solid fa-paper-plane"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </main>
+</div>
+{% endblock %}
+
+{% block js %}
+<script src="{% static 'js/profile.js' %}"></script>
+<script>
+    // Получаем элементы один раз при загрузке
+    const chatWindow = document.getElementById('chat-window');
+    const userInput = document.getElementById('user-input');
+
+    async function sendMessage() {
+        const message = userInput.value.trim();
+        
+        // Если поле пустое — ничего не делаем
+        if (!message) return;
+
+        console.log("Отправка сообщения:", message);
+
+        // 1. Рисуем сообщение пользователя
+        appendMessage(message, 'user-message');
+        userInput.value = '';
+
+        // 2. Создаем временное сообщение ожидания
+        const typingDiv = appendMessage("Думаю...", 'ai-message');
+
+        try {
+            // Отправляем запрос на сервер Django
+            const response = await fetch("{% url 'ai_chat_api' %}", {
+                method: 'POST',
+                headers: { 
+                    'Content-Type': 'application/json',
+                    'X-CSRFToken': '{{ csrf_token }}' 
+                },
+                body: JSON.stringify({ message: message })
+            });
+
+            const data = await response.json();
+            console.log("Ответ сервера:", data);
+
+            if (response.ok) {
+                // Заменяем "Думаю..." на реальный ответ
+                typingDiv.innerText = data.response;
+            } else {
+                typingDiv.innerText = "Ошибка сервера: " + (data.response || "неизвестно");
+                typingDiv.style.color = "#ff4d4d";
+            }
+
+        } catch (error) {
+            console.error("Критическая ошибка JS:", error);
+            typingDiv.innerText = "Ошибка соединения. Проверь консоль (F12).";
+            typingDiv.style.color = "#ff4d4d";
+        }
+    }
+
+    function appendMessage(text, className) {
+        if (!chatWindow) {
+            console.error("Ошибка: Элемент chat-window не найден!");
+            return;
+        }
+        const msgDiv = document.createElement('div');
+        msgDiv.className = `message ${className} fade-up`;
+        msgDiv.innerText = text;
+        chatWindow.appendChild(msgDiv);
+        
+        // Скролл вниз
+        chatWindow.scrollTop = chatWindow.scrollHeight;
+        return msgDiv;
+    }
+
+    // Обработка нажатия Enter в поле ввода
+    if (userInput) {
+        userInput.addEventListener('keypress', function(e) {
+            if (e.key === 'Enter') {
+                sendMessage();
+            }
+        });
+    }
+</script>
+{% endblock %}#all this html document was made by Arsēnijs Kopačs
