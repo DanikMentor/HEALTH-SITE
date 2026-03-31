@@ -1,4 +1,4 @@
-{% extends 'base.html' %}/* made by Arsēmijs Kopačs
+{% extends 'base.html' %}/* made by Nikita Kudevics(thank you my friend Arsemijs for you code.Your code made my work much more easier)
 {% load static %}
 
 {% block css %}
@@ -121,7 +121,7 @@
                 <span class="nav-text">AI Чат</span>
                 <span class="badge-pro">PRO</span>
             </a>
-            
+
             <a href="{% url 'calory_counter_api' %}" class="nav-item bypass-js">
                 <i class="fa-solid fa-robot"></i> 
                 <span class="nav-text">Анализ Еды</span>
@@ -159,21 +159,31 @@
         <div class="dash-container section active">
             <div class="chat-container-inner fade-up delay-1">
                 <div class="card-header">
-                    <h3><i class="fa-solid fa-robot"></i> AI Тренер <span class="badge-pro" style="background: #00ffa3; color: black; padding: 2px 8px; border-radius: 4px; font-size: 12px; margin-left: 10px;">PRO</span></h3>
+                    <h3><i class="fa-solid fa-robot"></i> AI Нутриолог <span class="badge-pro" style="background: #00ffa3; color: black; padding: 2px 8px; border-radius: 4px; font-size: 12px; margin-left: 10px;">PRO</span></h3>
                 </div>
 
                 <div id="chat-window" class="chat-window">
                     <div class="message ai-message">
-                        Привет! Я твой AI-тренер. Чем могу помочь сегодня?
+                        Привет! Я твой AI-Нутриолог. Я умею определять бжу, чем я могу помочь?
                     </div>
                 </div>
 
-                <div class="input-group">
-                    <input type="text" id="user-input" class="chat-input" placeholder="Введите сообщение..." onkeypress="if(event.key==='Enter') sendMessage()">
-                    <button onclick="sendMessage()" class="send-btn">
-                        <i class="fa-solid fa-paper-plane"></i>
-                    </button>
-                </div>
+<div class="input-group">
+    <input type="file" id="file-input" accept="image/*" style="display: none;" onchange="handleFileSelect()">
+    
+    <button type="button" class="send-btn" onclick="document.getElementById('file-input').click()" style="background: rgba(255,255,255,0.1); color: white;">
+        <i class="fa-solid fa-paperclip"></i>
+    </button>
+
+    <input type="text" id="user-input" class="chat-input" placeholder="Опишите еду на фото..." onkeypress="if(event.key==='Enter') sendMessage()">
+    
+    <button onclick="sendMessage()" class="send-btn">
+        <i class="fa-solid fa-paper-plane"></i>
+    </button>
+</div>
+<div id="file-preview" style="color: #00ffa3; font-size: 12px; margin-top: 5px; padding-left: 15px; display: none;">
+    <i class="fa-solid fa-image"></i> <span id="file-name"></span>
+</div>
             </div>
         </div>
     </main>
@@ -181,78 +191,71 @@
 {% endblock %}
 
 {% block js %}
-<script src="{% static 'js/profile.js' %}"></script>
 <script>
-    // Получаем элементы один раз при загрузке
     const chatWindow = document.getElementById('chat-window');
     const userInput = document.getElementById('user-input');
+    const fileInput = document.getElementById('file-input');
+    const filePreview = document.getElementById('file-preview');
+    const fileNameSpan = document.getElementById('file-name');
 
-    async function sendMessage() {
-        const message = userInput.value.trim();
-        
-        // Если поле пустое — ничего не делаем
-        if (!message) return;
-
-        console.log("Отправка сообщения:", message);
-
-        // 1. Рисуем сообщение пользователя
-        appendMessage(message, 'user-message');
-        userInput.value = '';
-
-        // 2. Создаем временное сообщение ожидания
-        const typingDiv = appendMessage("Думаю...", 'ai-message');
-
-        try {
-            // Отправляем запрос на сервер Django
-            const response = await fetch("{% url 'ai_chat_api' %}", {
-                method: 'POST',
-                headers: { 
-                    'Content-Type': 'application/json',
-                    'X-CSRFToken': '{{ csrf_token }}' 
-                },
-                body: JSON.stringify({ message: message })
-            });
-
-            const data = await response.json();
-            console.log("Ответ сервера:", data);
-
-            if (response.ok) {
-                // Заменяем "Думаю..." на реальный ответ
-                typingDiv.innerText = data.response;
-            } else {
-                typingDiv.innerText = "Ошибка сервера: " + (data.response || "неизвестно");
-                typingDiv.style.color = "#ff4d4d";
-            }
-
-        } catch (error) {
-            console.error("Критическая ошибка JS:", error);
-            typingDiv.innerText = "Ошибка соединения. Проверь консоль (F12).";
-            typingDiv.style.color = "#ff4d4d";
+    function handleFileSelect() {
+        if (fileInput.files.length > 0) {
+            fileNameSpan.innerText = fileInput.files[0].name;
+            filePreview.style.display = 'block';
         }
     }
 
     function appendMessage(text, className) {
-        if (!chatWindow) {
-            console.error("Ошибка: Элемент chat-window не найден!");
-            return;
-        }
         const msgDiv = document.createElement('div');
         msgDiv.className = `message ${className} fade-up`;
         msgDiv.innerText = text;
         chatWindow.appendChild(msgDiv);
-        
-        // Скролл вниз
         chatWindow.scrollTop = chatWindow.scrollHeight;
         return msgDiv;
     }
 
-    // Обработка нажатия Enter в поле ввода
-    if (userInput) {
-        userInput.addEventListener('keypress', function(e) {
-            if (e.key === 'Enter') {
-                sendMessage();
+    async function sendMessage() {
+        const message = userInput.value.trim();
+        const file = fileInput.files[0];
+        
+        if (!message && !file) return;
+
+        let displayMsg = message;
+        if (file) displayMsg = `[Фото: ${file.name}] ${message}`;
+        appendMessage(displayMsg, 'user-message');
+
+        userInput.value = '';
+        fileInput.value = '';
+        filePreview.style.display = 'none';
+
+        const typingDiv = appendMessage("Анализирую состав еды...", 'ai-message');
+
+        const formData = new FormData();
+        formData.append('message', message);
+        if (file) {
+            formData.append('image', file);
+        }
+
+        try {
+            const response = await fetch("{% url 'calory_counter_api' %}", {
+                method: 'POST',
+                headers: { 
+                    'X-CSRFToken': '{{ csrf_token }}' 
+                },
+                body: formData
+            });
+
+            const data = await response.json();
+
+            if (response.ok) {
+                typingDiv.innerText = data.response;
+            } else {
+                typingDiv.innerText = "Ошибка: " + (data.response || "не удалось разобрать фото");
             }
-        });
+
+        } catch (error) {
+            typingDiv.innerText = "Ошибка соединения с сервером.";
+        }
     }
 </script>
-{% endblock %}#all this html document was made by Arsēmijs Kopačs
+{% endblock %}

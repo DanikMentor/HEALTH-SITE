@@ -8,7 +8,7 @@ from django.http import JsonResponse
 from django.views.decorators.csrf import csrf_exempt
 
 @csrf_exempt
-def ai_chat_api(request): #made by Arsēnijs Kopačs
+def ai_chat_api(request): #made by Arsēmijs Kopačs
     if request.method == 'POST':
         try:
             # 1. Твой ключ
@@ -51,6 +51,19 @@ def ai_chat_api(request): #made by Arsēnijs Kopačs
 
     return JsonResponse({'error': 'Method not allowed'}, status=405)
 
+
+
+
+
+
+
+
+
+
+
+
+#Регистрация made by Nikitos
+
 def register_view(request):
     if request.method == "POST":
         username = request.POST.get('username')
@@ -73,7 +86,19 @@ def register_view(request):
 
     return render(request, 'users/register.html')
 
-#Функция логина
+
+
+
+
+
+
+
+
+
+
+
+
+#Функция логина made by Nikitos
 
 def login_view(request):
     if request.method == "POST":
@@ -96,3 +121,21 @@ def login_view(request):
 
 def profile_view(request):
     return render(request, 'users/profile.html')
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+def calory_counter_api(request):#Функция для подсчёта калорий Made by Nikitos
+    return render(request, 'calory_counter/calory_counter.html')
