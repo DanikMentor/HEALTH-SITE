@@ -116,15 +116,14 @@
                 <i class="fa-solid fa-book"></i> Дневник
             </a>
 
-            <a href="{% url 'ai_chat' %}" class="nav-item active bypass-js">
+            <a href="{% url 'ai_chat' %}" class="nav-item {% if request.resolver_match.url_name == 'ai_chat' %}active{% endif %} bypass-js">
                 <i class="fa-solid fa-robot"></i> 
                 <span class="nav-text">AI Чат</span>
                 <span class="badge-pro">PRO</span>
             </a>
 
-            <a href="{% url 'calory_counter_api' %}" class="nav-item bypass-js">
-                <i class="fa-solid fa-robot"></i> 
-                <span class="nav-text">Анализ Еды</span>
+            <a href="{% url 'calory_counter_api' %}" class="nav-item {% if request.resolver_match.url_name == 'calory_counter_api' %}active{% endif %} bypass-js">
+                <i class="fa-solid fa-utensils"></i> <span class="nav-text">Анализ Еды</span>
                 <span class="badge-pro">PRO</span>
             </a>
 
