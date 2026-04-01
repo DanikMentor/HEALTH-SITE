@@ -23,6 +23,44 @@
     transition: transform 0.3s ease;
 }
 
+.sidebar-nav {
+    display: flex;
+    flex-direction: column;
+    
+    /* Устанавливаем высоту (например, на весь экран) */
+    max-height: 100vh; 
+    
+    /* Включаем вертикальный скролл, если контента слишком много */
+    overflow-y: auto;
+    
+    /* Скрываем горизонтальный скролл на всякий случай */
+    overflow-x: hidden;
+}
+
+/* Настройка внешнего вида скроллбара (для Chrome, Safari, Edge) */
+.sidebar-nav::-webkit-scrollbar {
+    width: 6px; /* Ширина полосы */
+}
+
+.sidebar-nav::-webkit-scrollbar-track {
+    background: transparent; /* Цвет дорожки */
+}
+
+.sidebar-nav::-webkit-scrollbar-thumb {
+    background: #888; /* Цвет самого ползунка */
+    border-radius: 10px;
+}
+
+.sidebar-nav::-webkit-scrollbar-thumb:hover {
+    background: #555; /* Цвет при наведении */
+}
+
+/* Поддержка для Firefox */
+.sidebar-nav {
+    scrollbar-width: thin;
+    scrollbar-color: #888 transparent;
+}
+
 .sidebar-logo {
     font-size: 1.5rem; font-weight: 800; color: #fff;
     margin-bottom: 50px; padding-left: 10px; display: flex; align-items: center; justify-content: space-between;
