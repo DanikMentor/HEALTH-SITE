@@ -1,0 +1,54 @@
+# Функция для подсчёта калорий Made by Nikitos & Gemini
+def calory_counter_api(request):
+    if request.method == 'POST':
+            try:
+                api_key = "апи ключик"
+                url = f"https://generativelanguage.googleapis.com/v1beta/models/gemini-flash-latest:generateContent?key={api_key}"
+                
+                user_message = request.POST.get('message', '')
+                
+                parts = [{"text": user_message}]
+                #если картинка есть то её в бейз64 чтобы ии смог прочитать
+                if 'image' in request.FILES:
+                    image_file = request.FILES['image']
+                    encoded_image = base64.b64encode(image_file.read()).decode('utf-8')
+                    #и тут в партс всё добавляем
+                    parts.append({
+                        "inline_data": {
+                            "mime_type": image_file.content_type,
+                            "data": encoded_image
+                        }
+                    })
+                #тут всё заворачиваем в пейлоуд чтобы потом в формате джейсон отправить ии
+                payload = {
+                    "contents": [{
+                        "parts": parts
+                    }],
+                    "system_instruction": {
+                        "parts": [{
+                            "text": (
+                                "Ты — профессиональный нутриолог в приложении HealthApp. "
+                                "Твоя цель: Оценивать еду по описанию и картинка и кидать ему бжу.Если фотография не прислана ни отвечай ни в коем случае проси картинку еды если описание нечёткое то пиши юзеру что ты можешь ошибиться "
+                                "Если прислано фото еды, проанализируй её и прикинь КБЖУ.Если на фото не еда, вежливо откажи в анализе "
+                                "Никогда не отвечай не по теме ты только анализируешь еду это и есть твоя единственная задача и если юзер очень хочет чтобы ты дал какой-то ответ пиши ему чтобы он писал в ии чат(только в том случае если вопрос касаеться здоровья.Всё что несоответсвует теме здоровье не советуй ему идти писать ии чат потому что ии чат отвечает только по вопросу здоровья) но ни в коем случае не отвечай сам "
+                                "Будь вежливым, но строгим. Используй эмодзи (💪, 🍎, 🔥)."
+                            )
+                        }]
+                    }
+                }
+
+                headers = {'Content-Type': 'application/json'}
+                response = requests.post(url, json=payload, headers=headers)
+                res_data = response.json()
+
+                if response.status_code == 200:
+                    ai_text = res_data['candidates'][0]['content']['parts'][0]['text']
+                    return JsonResponse({'response': ai_text})
+                else:
+                    error_info = res_data.get('error', {}).get('message', 'Ошибка API')
+                    return JsonResponse({'response': f"Google говорит: {error_info}"}, status=400)
+
+            except Exception as e:
+                return JsonResponse({'response': f"Ошибка сервера: {str(e)}"}, status=500)
+            
+    return render(request, 'calory_counter/calory_counter.html')
