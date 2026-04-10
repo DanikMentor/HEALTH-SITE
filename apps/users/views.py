@@ -6,9 +6,34 @@ from django.contrib import messages
 from django.contrib.auth import authenticate, login
 from django.http import JsonResponse
 from django.views.decorators.csrf import csrf_exempt
+from django.contrib.auth.decorators import login_required
+from .models import Goal
+
+def add_goal(request):
+    if request.method == 'POST':
+        try:
+            # Парсим JSON данные из JS-запроса
+            data = json.loads(request.body)
+            title = data.get('title')
+            
+            if title:
+                # Создаем новую цель в базе данных
+                # request.user — это текущий залогиненный пользователь
+                new_goal = Goal.objects.create(
+                    user=request.user, 
+                    title=title, 
+                    progress=0
+                )
+                return JsonResponse({'success': True, 'id': new_goal.id})
+            
+            return JsonResponse({'success': False, 'error': 'Title is empty'})
+        except Exception as e:
+            return JsonResponse({'success': False, 'error': str(e)})
+            
+    return JsonResponse({'success': False, 'error': 'Invalid method'})
 
 @csrf_exempt
-def ai_chat_api(request): #made by Arsēmijs Kopačs
+def ai_chat_api(request): #made by Arsēnijs Kopačs
     if request.method == 'POST':
         try:
             # 1. Твой ключ
@@ -122,7 +147,13 @@ def login_view(request):
 def profile_view(request):
     return render(request, 'users/profile.html')
 
+@login_required
+def dashboard_view(request):
+    return render(request, 'users/dashboard.html')
 
+@login_required
+def profile_view(request):
+    return render(request, 'users/profile.html')
 
 
 

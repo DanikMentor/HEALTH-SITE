@@ -1,4 +1,4 @@
-{% extends 'base.html' %}
+{% extends 'base.html' %}#made by Nikitos
 {% load static %}
 
 {% block css %}
@@ -15,11 +15,12 @@
         </div>
     
         <nav class="sidebar-nav">
-            <a href="{% url 'profile' %}" class="nav-item active"><i class="fa-solid fa-border-all"></i> Дашборд</a>
-            <a href="{% url 'profile' %}" class="nav-item"><i class="fa-solid fa-user"></i> Профиль</a>
+            <a href="{% url 'dashboard' %}" class="nav-item"><i class="fa-solid fa-border-all"></i> Дашборд</a>
+            <a href="{% url 'profile' %}" class="nav-item active"><i class="fa-solid fa-user"></i> Профиль</a>
+            
             <a href="#" class="nav-item"><i class="fa-solid fa-fire"></i> Тренировки</a>
-
-            <a href="#" class="nav-item"><i class="fa-solid fa-utensils"></i> Рецепты</a>            <a href="#" class="nav-item"><i class="fa-solid fa-book"></i> Дневник</a>
+            <a href="#" class="nav-item"><i class="fa-solid fa-utensils"></i> Рецепты</a>            
+            <a href="#" class="nav-item"><i class="fa-solid fa-book"></i> Дневник</a>
             <a href="{% url 'ai_chat' %}" class="nav-item bypass-js">
                 <i class="fa-solid fa-robot"></i> 
                 <span class="nav-text">AI Чат</span>
@@ -30,8 +31,6 @@
                 <span class="nav-text">Анализ Еды</span>
                 <span class="badge-pro">PRO</span>
             </a>
-
-
             <a href="#" class="nav-item"><i class="fa-solid fa-gear"></i> Настройки</a>
         </nav>
         
@@ -40,7 +39,6 @@
                 <i class="fa-solid fa-arrow-right-from-bracket"></i> Выйти
             </a>
         </div>
-        
     </aside>
 
     <main class="main-content">
@@ -57,63 +55,7 @@
             </div>
         </header>
 
-        <div class="dash-container section active" id="dashboard-section">
-            <div class="dash-card ai-card fade-up delay-1">
-                <div class="ai-header">
-                    <i class="fa-solid fa-robot pulse-icon"></i> 
-                    <span>AI Тренер на связи</span>
-                </div>
-                <p id="ai-typing-text" class="ai-text"></p>
-            </div>
-
-            <div class="stats-grid fade-up delay-2">
-                <div class="stat-card glass-card">
-                    <div class="stat-icon icon-orange"><i class="fa-solid fa-fire"></i></div>
-                    <div class="stat-info"><p>Калории</p><h3 class="count-up" data-target="1850">0</h3><span> ккал</span></div>
-                </div>
-                <div class="stat-card glass-card">
-                    <div class="stat-icon icon-green"><i class="fa-solid fa-dumbbell"></i></div>
-                    <div class="stat-info"><p>Тренировки</p><h3 class="count-up" data-target="4">0</h3><span> / нед</span></div>
-                </div>
-                <div class="stat-card glass-card">
-                    <div class="stat-icon icon-blue"><i class="fa-solid fa-scale-balanced"></i></div>
-                    <div class="stat-info"><p>Текущий вес</p><h3 class="count-up" data-target="76.5">0</h3><span> кг</span></div>
-                </div>
-                <div class="stat-card glass-card">
-                    <div class="stat-icon icon-purple"><i class="fa-solid fa-droplet"></i></div>
-                    <div class="stat-info"><p>Вода</p><h3 class="count-up" data-target="2.1">0</h3><span> л</span></div>
-                </div>
-            </div>
-
-            <div class="main-grid fade-up delay-3">
-                <div class="dash-card glass-card goals-card">
-                    <h3>🎯 Мои цели</h3>
-                    <div class="goal-item">
-                        <div class="goal-info"><span>Сбросить 5 кг</span><span>60%</span></div>
-                        <div class="progress-bar-bg"><div class="progress-fill" data-width="60%"></div></div>
-                    </div>
-                    <div class="goal-item">
-                        <div class="goal-info"><span>Пить 3л воды в день</span><span>70%</span></div>
-                        <div class="progress-bar-bg"><div class="progress-fill" data-width="70%"></div></div>
-                    </div>
-                </div>
-                <div class="dash-card glass-card activity-card">
-                    <h3>⚡ Последняя активность</h3>
-                    <div class="activity-list">
-                        <div class="activity-item">
-                            <div class="activity-icon"><i class="fa-solid fa-person-running"></i></div>
-                            <div class="activity-text"><h4>Кардио сессия</h4><p>Сегодня, 08:30 • 300 ккал</p></div>
-                        </div>
-                        <div class="activity-item">
-                            <div class="activity-icon"><i class="fa-solid fa-bowl-food"></i></div>
-                            <div class="activity-text"><h4>Завтрак: Овсянка</h4><p>Сегодня, 09:15 • 450 ккал</p></div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div> 
-
-        <div class="dash-container section hidden" id="profile-section">
+        <div class="dash-container section active" id="profile-section">
             
             <div class="profile-hero glass-card fade-up">
                 <div class="hero-content">
@@ -160,7 +102,7 @@
                                     <input type="text" value="Алекс" placeholder="Введите имя">
                                 </div>
                                 <div class="input-field">
-                                    <label>????</label>
+                                    <label>Фамилия</label>
                                     <input type="text" value="Фит" placeholder="Введите фамилию">
                                 </div>
                             </div>

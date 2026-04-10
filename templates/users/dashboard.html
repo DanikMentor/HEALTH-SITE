@@ -1,0 +1,138 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block css %}
+<link rel="stylesheet" href="{% static 'css/profile.css' %}">
+{% endblock %}
+
+{% block content %}
+<div class="dashboard-layout">
+    
+    <aside class="sidebar" id="sidebar">
+        <div class="sidebar-logo">
+            <i class="fa-solid fa-leaf">&nbsp;HealthApp</i> 
+            <button class="close-sidebar" id="close-sidebar"><i class="fa-solid fa-xmark"></i></button>
+        </div>
+    
+        <nav class="sidebar-nav">
+            <a href="{% url 'dashboard' %}" class="nav-item active"><i class="fa-solid fa-border-all"></i> Дашборд</a>
+            <a href="{% url 'profile' %}" class="nav-item"><i class="fa-solid fa-user"></i> Профиль</a>
+            
+            <a href="#" class="nav-item"><i class="fa-solid fa-fire"></i> Тренировки</a>
+            <a href="#" class="nav-item"><i class="fa-solid fa-utensils"></i> Рецепты</a>            
+            <a href="#" class="nav-item"><i class="fa-solid fa-book"></i> Дневник</a>
+            <a href="{% url 'ai_chat' %}" class="nav-item bypass-js">
+                <i class="fa-solid fa-robot"></i> 
+                <span class="nav-text">AI Чат</span>
+                <span class="badge-pro">PRO</span>
+            </a>
+            <a href="{% url 'calory_counter_api' %}" class="nav-item bypass-js">
+                <i class="fa-solid fa-robot"></i> 
+                <span class="nav-text">Анализ Еды</span>
+                <span class="badge-pro">PRO</span>
+            </a>
+            <a href="#" class="nav-item"><i class="fa-solid fa-gear"></i> Настройки</a>
+        </nav>
+        
+        <div class="sidebar-footer">
+            <a href="{% url 'index' %}" class="nav-item logout-btn bypass-js">
+                <i class="fa-solid fa-arrow-right-from-bracket"></i> Выйти
+            </a>
+        </div>
+    </aside>
+
+    <main class="main-content">
+        <header class="dash-header fade-up">
+            <button class="burger-btn" id="burger-btn"><i class="fa-solid fa-bars"></i></button>
+            <div class="user-profile">
+                <div class="user-info">
+                    <h4>{{ user.username }}</h4>
+                    <p>{{ user.email }}</p>
+                </div>
+                <div class="avatar-glow">
+                    <img src="https://ui-avatars.com/api/?name={{ user.username }}&background=00c896&color=fff" alt="Avatar" class="avatar">
+                </div>
+            </div>
+        </header>
+
+        <div class="dash-container section active" id="dashboard-section">
+            <div class="dash-card ai-card fade-up delay-1">
+                <div class="ai-header">
+                    <i class="fa-solid fa-robot pulse-icon"></i> 
+                    <span>AI Тренер на связи</span>
+                </div>
+                <p id="ai-typing-text" class="ai-text"></p>
+            </div>
+
+            <div class="stats-grid fade-up delay-2">
+                <div class="stat-card glass-card">
+                    <div class="stat-icon icon-orange"><i class="fa-solid fa-fire"></i></div>
+                    <div class="stat-info"><p>Калории</p><h3 class="count-up" data-target="1850">0</h3><span> ккал</span></div>
+                </div>
+                <div class="stat-card glass-card">
+                    <div class="stat-icon icon-green"><i class="fa-solid fa-dumbbell"></i></div>
+                    <div class="stat-info"><p>Тренировки</p><h3 class="count-up" data-target="4">0</h3><span> / нед</span></div>
+                </div>
+                <div class="stat-card glass-card">
+                    <div class="stat-icon icon-blue"><i class="fa-solid fa-scale-balanced"></i></div>
+                    <div class="stat-info"><p>Текущий вес</p><h3 class="count-up" data-target="76.5">0</h3><span> кг</span></div>
+                </div>
+                <div class="stat-card glass-card">
+                    <div class="stat-icon icon-purple"><i class="fa-solid fa-droplet"></i></div>
+                    <div class="stat-info"><p>Вода</p><h3 class="count-up" data-target="2.1">0</h3><span> л</span></div>
+                </div>
+            </div>
+
+            <div class="main-grid fade-up delay-3">
+                <div class="dash-card glass-card goals-card">
+                    <div class="card-header-flex">
+                        <h3>🎯 Мои цели</h3>
+                        <button id="open-goal-modal" class="add-goal-btn">
+                            <i class="fa-solid fa-plus"></i>
+                        </button>
+                    </div>
+
+                    <div class="goal-list" id="goal-list">
+                        {% for goal in goals %}
+                        <div class="goal-item">
+                            <div class="goal-info"><span>{{ goal.title }}</span><span>{{ goal.progress }}%</span></div>
+                            <div class="progress-bar-bg"><div class="progress-fill" style="width: {{ goal.progress }}%"></div></div>
+                        </div>
+                        {% empty %}
+                            <p class="no-goals">У вас пока нет целей. Добавьте первую!</p>
+                        {% endfor %}
+                    </div>
+                </div>
+
+                <div class="dash-card glass-card activity-card">
+                    <h3>⚡ Последняя активность</h3>
+                    <div class="activity-list">
+                        <div class="activity-item">
+                            <div class="activity-icon"><i class="fa-solid fa-person-running"></i></div>
+                            <div class="activity-text"><h4>Кардио сессия</h4><p>Сегодня, 08:30 • 300 ккал</p></div>
+                        </div>
+                        <div class="activity-item">
+                            <div class="activity-icon"><i class="fa-solid fa-bowl-food"></i></div>
+                            <div class="activity-text"><h4>Завтрак: Овсянка</h4><p>Сегодня, 09:15 • 450 ккал</p></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div> 
+    </main>
+</div>
+                <div id="goal-modal" class="modal hidden">
+                    <div class="modal-content glass-card">
+                        <h4>Добавить новую цель</h4>
+                        <input type="text" id="goal-title" placeholder="Например: Пробежать 10км">
+                        <div class="modal-buttons">
+                            <button id="save-goal" class="btn-save">Сохранить</button>
+                            <button id="close-modal" class="btn-cancel">Отмена</button>
+                        </div>
+                    </div>
+                </div>
+{% endblock %}
+
+{% block js %}
+<script src="{% static 'js/profile.js' %}"></script>
+{% endblock %}

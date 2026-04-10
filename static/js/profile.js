@@ -1,50 +1,9 @@
 document.addEventListener("DOMContentLoaded", () => {
     
-    // === 1. ПЕРЕКЛЮЧЕНИЕ СЕКЦИЙ (SPA LOGIC) ===
-    const navItems = document.querySelectorAll('.nav-item');
-    const sections = document.querySelectorAll('.section');
+    // БЛОК 1 (ПЕРЕКЛЮЧЕНИЕ СЕКЦИЙ) ПОЛНОСТЬЮ УДАЛЕН!
+    // Теперь за переходы по страницам отвечает Django (теги <a> с href)
 
-    navItems.forEach(item => {
-        item.addEventListener('click', (e) => {
-            const targetName = item.innerText.trim();
-            
-            // ИСКЛЮЧЕНИЯ: Если это выход или AI Чат — даем ссылке сработать штатно
-            // Также добавили проверку класса bypass-js для надежности
-            if (targetName === 'Выйти' || 
-                targetName.includes('AI Чат') || 
-                item.classList.contains('bypass-js')) {
-                return; // Скрипт просто завершается, переход по ссылке происходит
-            }
-            
-            // Для "Профиля" и "Дашборда" блокируем перезагрузку
-            e.preventDefault();
-
-            // Убираем активный класс у всех ссылок и даем нажатой
-            navItems.forEach(nav => nav.classList.remove('active'));
-            item.classList.add('active');
-
-            // Скрываем все секции
-            sections.forEach(sec => {
-                sec.classList.remove('active');
-                sec.classList.add('hidden');
-            });
-
-            // Логика выбора: Профиль или Дашборд
-            let targetId = (targetName === "Профиль") ? 'profile-section' : 'dashboard-section';
-            const targetSection = document.getElementById(targetId);
-
-            if (targetSection) {
-                targetSection.classList.remove('hidden');
-                setTimeout(() => {
-                    targetSection.classList.add('active');
-                }, 10);
-            }
-        });
-    });
-
-    // ... дальше твой остальной код (Тайпинг, Счетчики и т.д.) без изменений ...
-
-    // === 2. ЭФФЕКТ ПЕЧАТИ AI (ТВОЙ КОД) ===
+    // === 2. ЭФФЕКТ ПЕЧАТИ AI ===
     const aiTextElement = document.getElementById('ai-typing-text');
     const aiMessage = "Привет, Алекс! Твоя дневная норма калорий в норме. Рекомендую сегодня сделать упор на белки (куриная грудка или тофу), так как вчера была силовая тренировка. Готов начать?";
     let charIndex = 0;
@@ -56,7 +15,10 @@ document.addEventListener("DOMContentLoaded", () => {
             setTimeout(typeWriter, 30);
         }
     }
-    setTimeout(typeWriter, 800);
+    // Запускаем только если элемент есть на странице (т.е. мы на Дашборде)
+    if (aiTextElement) {
+        setTimeout(typeWriter, 800);
+    }
 
     // === 3. СЧЕТЧИКИ ЦИФР (COUNT-UP) ===
     const counters = document.querySelectorAll('.count-up');
@@ -98,12 +60,13 @@ document.addEventListener("DOMContentLoaded", () => {
     if(burgerBtn) burgerBtn.addEventListener('click', () => sidebar.classList.add('open'));
     if(closeBtn) closeBtn.addEventListener('click', () => sidebar.classList.remove('open'));
 
-    // === 6. РЕДАКТИРОВАНИЕ ПРОФИЛЯ (ВНУТРИ СЕКЦИИ) ===
+    // === 6. РЕДАКТИРОВАНИЕ ПРОФИЛЯ (ВНУТРИ СЕКЦИИ ПРОФИЛЯ) ===
     const editBtn = document.getElementById('toggle-edit-mode');
     const cancelBtn = document.getElementById('cancel-edit');
     const viewCard = document.getElementById('profile-view-card');
     const editForm = document.getElementById('profile-edit-form');
 
+    // Сработает только на странице Профиля
     if (editBtn && viewCard && editForm) {
         editBtn.addEventListener('click', () => {
             viewCard.classList.add('hidden');
@@ -115,3 +78,4 @@ document.addEventListener("DOMContentLoaded", () => {
         });
     }
 });
+  
